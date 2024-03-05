@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+option java_package = "org.spin.proto.mobile.auth";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+package auth;
+
+// Request a Login
+message LoginRequest {
+	string email = 1;
+	string password = 2;
+	string device_id = 3;
+	string device_info = 4;
+}
+
+// Login Response Data
+message LoginResponseData {
+	int32 id = 1;
+	int32 company_id = 2;
+	int32 department_id = 3;
+	string department_name = 4;
+	bool is_admin = 5;
+	bool is_hr = 6;
+	bool is_face_registered = 7;
+	string name = 8;
+	string email = 9;
+	string phone = 10;
+	string avatar = 11;
+	string token = 12;
+}
+
+// Response a Login
+message LoginResponse {
+	bool result = 1;
+	string message = 2;
+	string device_id = 3;
+	string device_info = 4;
+	LoginResponseData data = 5;
+}
+
+message CheckTokenRequest {
+	string token = 1;
+}
+
+message CheckTokenResponse {
+	
+}
+
+message LogoutResponse {
+	bool result = 1;
+	string message = 2;
+	LogoutData data = 3;
+}
+
+message LogoutRequest {
+
+}
+
+
+message LogoutData {
+
+}
+
+// The greeting service definition.
+service AuthService {
+	// Request login from user
+	rpc RunLogin(LoginRequest) returns (LoginResponse) {
+		option (google.api.http) = {
+			post: "/login",
+			body: "*"
+		};
+	}
+
+	rpc RunCheckToken(CheckTokenRequest) returns (CheckTokenResponse) {
+		option (google.api.http) = {
+			post: "/check-token",
+			body: "*"
+		};
+	}
+
+	rpc RunLogout(LogoutRequest) returns (LogoutResponse) {
+		option (google.api.http) = {
+			get: "/logout"
+		};
+	}
+}

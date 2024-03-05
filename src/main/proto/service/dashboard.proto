@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+option java_package = "org.spin.proto.mobile.dashboard";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+import "service/settings.proto";
+
+package dashboard;
+
+message GetStatisticsResponse {
+	bool result = 1;
+	string message = 2;
+	Statistic data = 3;
+}
+
+message Statistic {
+	repeated StatisticData today = 1;
+	repeated StatisticData current_month = 2;
+	repeated Appoinment appoinment_list = 3;
+	repeated Upcoming upcoming_events = 4;
+	AttendanceStatus attendance_status = 5;
+	BreakHistoryData break_history_data = 6;
+	settings.BaseSettingsData config = 7;
+}
+
+message StatisticData {
+	string image = 1;
+	string title = 2;
+	string slug = 3;
+	int32 number = 4;
+}
+
+message Appoinment {
+	int32 id = 1;
+	string title = 2;
+	string date = 3;
+	string day = 4;
+	string time = 5;
+	string start_at = 6;
+	string end_at = 7;
+	string location = 8;
+	string appoinmentWith = 9;
+	repeated Participant participants = 10;
+}
+
+message AttendanceStatus {
+	bool checkin = 1;
+	bool checkout = 2;
+	string in_time = 3;
+	string out_time = 4;
+	string stay_time = 5;
+}
+
+message BreakHistoryData {
+	string total_break_time = 1;
+	bool has_break = 2;
+	BreakHistoryDataToday break_history = 3;
+}
+
+message BreakHistoryDataToday {
+	repeated string today_history = 1;
+}
+
+message Participant {
+	string name = 1;
+	string is_agree = 2;
+	string is_present = 3;
+	int32 present_at = 4;
+	int32 appoinment_started_at = 5;
+	int32 appoinment_ended_at = 6;
+	int32 appoinment_duration = 7;
+}
+
+message Upcoming {
+	int32 id = 1;
+	string title = 2;
+	string description = 3;
+	string date = 4;
+	string day = 5;
+	string start_date = 6;
+	string attachment_file_id = 7;
+}
+
+message GetStatisticsRequest {
+
+}
+
+service DashboardService {
+	rpc GetStatistics(GetStatisticsRequest) returns (GetStatisticsResponse) {
+		option (google.api.http) = {
+			get: "/dashboard/statistics"
+		};
+	}
+}

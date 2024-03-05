@@ -1,0 +1,1042 @@
+{
+	"info": {
+		"_postman_id": "3365b44b-b319-41e5-85f8-8fc97fb5136d",
+		"name": "ADempiere Mobile Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18440575",
+		"_collection_link": "https://developerpya.postman.co/workspace/Y-Workspace~1fb216db-1011-498d-83ab-258082f68995/collection/18440575-3365b44b-b319-41e5-85f8-8fc97fb5136d?action=share&source=collection_link&creator=18440575"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"GardenUser\",\n\t\"password\": \"GardenUser\",\n    \"device_id\": \"asddasd\", \n    \"device_info\": \"asdasd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/login",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\" : \"GardenUser\",\n\t\"password\": \"GardenUser\",\n    \"device_id\": \"asddasd\", \n    \"device_info\": \"asdasd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "1194"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "696"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 23 Jan 2024 20:20:30 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"Successfully Login\",\n    \"device_id\": \"\",\n    \"device_info\": \"\",\n    \"data\": {\n        \"id\": 0,\n        \"company_id\": 11,\n        \"department_id\": 0,\n        \"department_name\": \"\",\n        \"is_admin\": false,\n        \"is_hr\": false,\n        \"is_face_registered\": false,\n        \"name\": \"GardenUser\",\n        \"email\": \"user @ gardenworld.com\",\n        \"phone\": \"\",\n        \"avatar\": \"https://hrm.onesttech.com/static/blank_small.png\",\n        \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTE1IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwMSwiQURfUm9sZV9JRCI6MTAzLCJBRF9Vc2VyX0lEIjoxMDIsIk1fV2FyZWhvdXNlX0lEIjo1MDAwMiwiQURfTGFuZ3VhZ2UiOiJlbl9VUyIsImlhdCI6MTcwNjA0MTIzMCwiZXhwIjoxNzA2MTI3NjMwfQ.n2l9B1Bg6oi0qEj5e9rrEifgjw1-QF3WcuPbZz_p2VI\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\": \"{{auth-token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/check-token",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"check-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hrm_local}}/logout",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/logout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "1302"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "46"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 24 Jan 2024 18:57:43 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"Logged Out\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Base Settings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/app/base-settings",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"app",
+								"base-settings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Base Settings",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}app/base-settings",
+									"host": [
+										"{{hrm_local}}app"
+									],
+									"path": [
+										"base-settings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 24 Jan 2024 19:27:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.26"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=JtI4xDoPVNM9a9oYz0a3cR6441SaFI5JNwWzJzP2SXWQ8lbKPJrzkn9L744MPHZh975ZJzEm0WhNURNKWjovGDPQvaOZun%2BMYt4OcN8v%2FIQ3E%2BCsByBtS3TwHgF%2F3DiDq0vA7A%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "84aaad123993b3c8-MIA"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"Base settings information\",\n    \"data\": {\n        \"is_admin\": true,\n        \"is_hr\": true,\n        \"is_manager\": true,\n        \"is_face_registered\": true,\n        \"multi_checkin\": true,\n        \"location_bind\": false,\n        \"is_ip_enabled\": false,\n        \"departments\": [\n            {\n                \"id\": 1,\n                \"title\": \"Management\"\n            },\n            {\n                \"id\": 2,\n                \"title\": \"IT\"\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Sales\"\n            }\n        ],\n        \"designations\": [\n            {\n                \"id\": 1,\n                \"title\": \"Admin\"\n            },\n            {\n                \"id\": 2,\n                \"title\": \"HR\"\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Staff\"\n            }\n        ],\n        \"employee_types\": [\n            \"Permanent\",\n            \"On Probation\",\n            \"Contractual\",\n            \"Intern\"\n        ],\n        \"permissions\": [\n            \"hr_menu\",\n            \"designation_read\",\n            \"designation_create\",\n            \"designation_update\",\n            \"designation_delete\",\n            \"department_read\",\n            \"department_create\",\n            \"department_update\",\n            \"department_delete\",\n            \"user_read\",\n            \"profile_view\",\n            \"user_create\",\n            \"user_edit\",\n            \"user_permission\",\n            \"user_update\",\n            \"user_delete\",\n            \"user_menu\",\n            \"make_hr\",\n            \"profile_image_view\",\n            \"user_device_list\",\n            \"reset_device\",\n            \"attendance_profile\",\n            \"phonebook_profile\",\n            \"support_ticket_profile\",\n            \"advance_profile\",\n            \"commission_profile\",\n            \"appointment_profile\",\n            \"visit_profile\",\n            \"leave_request_profile\",\n            \"notice_profile\",\n            \"salary_profile\",\n            \"project_profile\",\n            \"task_profile\",\n            \"award_profile\",\n            \"travel_profile\",\n            \"role_read\",\n            \"role_create\",\n            \"role_update\",\n            \"role_delete\",\n            \"branch_read\",\n            \"branch_create\",\n            \"branch_update\",\n            \"branch_delete\",\n            \"leave_type_read\",\n            \"leave_type_create\",\n            \"leave_type_update\",\n            \"leave_type_delete\",\n            \"leave_menu\",\n            \"leave_assign_read\",\n            \"leave_assign_create\",\n            \"leave_assign_update\",\n            \"leave_assign_delete\",\n            \"daily_leave_read\",\n            \"leave_request_read\",\n            \"leave_request_update\",\n            \"leave_request_store\",\n            \"leave_request_create\",\n            \"leave_request_approve\",\n            \"leave_request_reject\",\n            \"leave_request_delete\",\n            \"weekend_read\",\n            \"weekend_update\",\n            \"holiday_read\",\n            \"holiday_create\",\n            \"holiday_update\",\n            \"holiday_delete\",\n            \"schedule_read\",\n            \"schedule_create\",\n            \"schedule_update\",\n            \"schedule_delete\",\n            \"attendance_read\",\n            \"attendance_create\",\n            \"attendance_update\",\n            \"attendance_delete\",\n            \"attendance_menu\",\n            \"shift_read\",\n            \"shift_create\",\n            \"shift_update\",\n            \"shift_delete\",\n            \"shift_menu\",\n            \"payroll_menu\",\n            \"list_payroll_item\",\n            \"create_payroll_item\",\n            \"store_payroll_item\",\n            \"edit_payroll_item\",\n            \"update_payroll_item\",\n            \"delete_payroll_item\",\n            \"view_payroll_item\",\n            \"payroll_item_menu\",\n            \"list_payroll_set\",\n            \"create_payroll_set\",\n            \"store_payroll_set\",\n            \"edit_payroll_set\",\n            \"update_payroll_set\",\n            \"delete_payroll_set\",\n            \"view_payroll_set\",\n            \"payroll_set_menu\",\n            \"payslip_menu\",\n            \"salary_generate\",\n            \"salary_view\",\n            \"salary_delete\",\n            \"salary_edit\",\n            \"salary_update\",\n            \"salary_payment\",\n            \"payslip_list\",\n            \"announcement_menu\",\n            \"notice_menu\",\n            \"notice_list\",\n            \"notice_edit\",\n            \"notice_update\",\n            \"notice_create\",\n            \"notice_delete\",\n            \"advance_type_menu\",\n            \"advance_type_create\",\n            \"advance_type_store\",\n            \"advance_type_edit\",\n            \"advance_type_update\",\n            \"advance_type_delete\",\n            \"advance_type_view\",\n            \"advance_type_list\",\n            \"advance_salaries_menu\",\n            \"advance_salaries_create\",\n            \"advance_salaries_store\",\n            \"advance_salaries_edit\",\n            \"advance_salaries_update\",\n            \"advance_salaries_delete\",\n            \"advance_salaries_view\",\n            \"advance_salaries_approve\",\n            \"advance_salaries_list\",\n            \"advance_salaries_pay\",\n            \"advance_salaries_invoice\",\n            \"advance_salaries_search\",\n            \"salary_menu\",\n            \"salary_store\",\n            \"salary_edit\",\n            \"salary_update\",\n            \"salary_delete\",\n            \"salary_view\",\n            \"salary_list\",\n            \"salary_pay\",\n            \"salary_invoice\",\n            \"salary_approve\",\n            \"salary_generate\",\n            \"salary_calculate\",\n            \"salary_search\",\n            \"account_menu\",\n            \"account_create\",\n            \"account_store\",\n            \"account_edit\",\n            \"account_update\",\n            \"account_delete\",\n            \"account_view\",\n            \"account_list\",\n            \"account_search\",\n            \"deposit_menu\",\n            \"deposit_create\",\n            \"deposit_store\",\n            \"deposit_edit\",\n            \"deposit_update\",\n            \"deposit_delete\",\n            \"deposit_list\",\n            \"expense_menu\",\n            \"expense_create\",\n            \"expense_store\",\n            \"expense_edit\",\n            \"expense_update\",\n            \"expense_delete\",\n            \"expense_list\",\n            \"expense_approve\",\n            \"expense_invoice\",\n            \"expense_pay\",\n            \"expense_view\",\n            \"deposit_category_menu\",\n            \"deposit_category_create\",\n            \"deposit_category_store\",\n            \"deposit_category_edit\",\n            \"deposit_category_update\",\n            \"deposit_category_delete\",\n            \"deposit_category_list\",\n            \"payment_method_menu\",\n            \"payment_method_create\",\n            \"payment_method_store\",\n            \"payment_method_edit\",\n            \"payment_method_update\",\n            \"payment_method_delete\",\n            \"payment_method_list\",\n            \"transaction_menu\",\n            \"transaction_create\",\n            \"transaction_store\",\n            \"transaction_edit\",\n            \"transaction_update\",\n            \"transaction_delete\",\n            \"transaction_view\",\n            \"transaction_list\",\n            \"project_menu\",\n            \"project_create\",\n            \"project_store\",\n            \"project_edit\",\n            \"project_update\",\n            \"project_delete\",\n            \"project_view\",\n            \"project_list\",\n            \"project_activity_view\",\n            \"project_member_view\",\n            \"project_member_delete\",\n            \"project_complete\",\n            \"project_payment\",\n            \"project_invoice_view\",\n            \"project_discussion_create\",\n            \"project_discussion_store\",\n            \"project_discussion_edit\",\n            \"project_discussion_update\",\n            \"project_discussion_delete\",\n            \"project_discussion_view\",\n            \"project_discussion_list\",\n            \"project_discussion_comment\",\n            \"project_discussion_reply\",\n            \"project_file_create\",\n            \"project_file_store\",\n            \"project_file_edit\",\n            \"project_file_update\",\n            \"project_file_delete\",\n            \"project_file_view\",\n            \"project_file_list\",\n            \"project_file_download\",\n            \"project_file_comment\",\n            \"project_file_reply\",\n            \"project_notes_create\",\n            \"project_notes_store\",\n            \"project_notes_edit\",\n            \"project_notes_update\",\n            \"project_notes_delete\",\n            \"project_notes_list\",\n            \"project_files_comment\",\n            \"general_settings_read\",\n            \"general_settings_update\",\n            \"email_settings_update\",\n            \"storage_settings_update\",\n            \"task_menu\",\n            \"task_create\",\n            \"task_store\",\n            \"task_edit\",\n            \"task_update\",\n            \"task_delete\",\n            \"task_view\",\n            \"task_list\",\n            \"task_activity_view\",\n            \"task_assign_view\",\n            \"task_assign_delete\",\n            \"task_complete\",\n            \"client_menu\",\n            \"client_create\",\n            \"client_store\",\n            \"client_edit\",\n            \"client_update\",\n            \"client_delete\",\n            \"client_view\",\n            \"client_list\",\n            \"task_discussion_create\",\n            \"task_discussion_store\",\n            \"task_discussion_edit\",\n            \"task_discussion_update\",\n            \"task_discussion_delete\",\n            \"task_discussion_view\",\n            \"task_discussion_list\",\n            \"task_discussion_comment\",\n            \"task_discussion_reply\",\n            \"task_file_create\",\n            \"task_file_store\",\n            \"task_file_edit\",\n            \"task_file_update\",\n            \"task_file_delete\",\n            \"task_file_view\",\n            \"task_file_list\",\n            \"task_file_download\",\n            \"task_file_comment\",\n            \"task_file_reply\",\n            \"task_notes_create\",\n            \"task_notes_store\",\n            \"task_notes_edit\",\n            \"task_notes_update\",\n            \"task_notes_delete\",\n            \"task_notes_list\",\n            \"task_files_comment\",\n            \"award_type_menu\",\n            \"award_type_create\",\n            \"award_type_store\",\n            \"award_type_edit\",\n            \"award_type_update\",\n            \"award_type_delete\",\n            \"award_type_list\",\n            \"award_menu\",\n            \"award_create\",\n            \"award_store\",\n            \"award_edit\",\n            \"award_update\",\n            \"award_delete\",\n            \"award_view\",\n            \"award_list\",\n            \"travel_type_menu\",\n            \"travel_type_create\",\n            \"travel_type_store\",\n            \"travel_type_edit\",\n            \"travel_type_update\",\n            \"travel_type_delete\",\n            \"travel_type_list\",\n            \"travel_menu\",\n            \"travel_create\",\n            \"travel_store\",\n            \"travel_edit\",\n            \"travel_update\",\n            \"travel_delete\",\n            \"travel_view\",\n            \"travel_list\",\n            \"travel_approve\",\n            \"travel_payment\",\n            \"meeting_menu\",\n            \"meeting_create\",\n            \"meeting_store\",\n            \"meeting_edit\",\n            \"meeting_update\",\n            \"meeting_delete\",\n            \"meeting_view\",\n            \"meeting_list\",\n            \"appointment_menu\",\n            \"appointment_read\",\n            \"appointment_create\",\n            \"appointment_approve\",\n            \"appointment_reject\",\n            \"appointment_delete\",\n            \"performance_menu\",\n            \"performance_settings\",\n            \"performance_indicator_menu\",\n            \"performance_indicator_create\",\n            \"performance_indicator_store\",\n            \"performance_indicator_edit\",\n            \"performance_indicator_update\",\n            \"performance_indicator_delete\",\n            \"performance_indicator_list\",\n            \"performance_appraisal_menu\",\n            \"performance_appraisal_create\",\n            \"performance_appraisal_store\",\n            \"performance_appraisal_edit\",\n            \"performance_appraisal_update\",\n            \"performance_appraisal_delete\",\n            \"performance_appraisal_list\",\n            \"performance_appraisal_view\",\n            \"performance_goal_type_menu\",\n            \"performance_goal_type_create\",\n            \"performance_goal_type_store\",\n            \"performance_goal_type_edit\",\n            \"performance_goal_type_update\",\n            \"performance_goal_type_delete\",\n            \"performance_goal_type_list\",\n            \"performance_goal_menu\",\n            \"performance_goal_create\",\n            \"performance_goal_store\",\n            \"performance_goal_edit\",\n            \"performance_goal_update\",\n            \"performance_goal_delete\",\n            \"performance_goal_view\",\n            \"performance_goal_list\",\n            \"performance_competence_type_menu\",\n            \"performance_competence_type_create\",\n            \"performance_competence_type_store\",\n            \"performance_competence_type_edit\",\n            \"performance_competence_type_update\",\n            \"performance_competence_type_delete\",\n            \"performance_competence_type_list\",\n            \"performance_competence_menu\",\n            \"performance_competence_create\",\n            \"performance_competence_store\",\n            \"performance_competence_edit\",\n            \"performance_competence_update\",\n            \"performance_competence_delete\",\n            \"performance_competence_list\",\n            \"attendance_report_read\",\n            \"live_tracking_read\",\n            \"report_menu\",\n            \"leave_settings_read\",\n            \"leave_settings_update\",\n            \"ip_read\",\n            \"ip_create\",\n            \"ip_update\",\n            \"ip_delete\",\n            \"company_setup_menu\",\n            \"company_setup_activation\",\n            \"company_setup_activation_update\",\n            \"company_setup_configuration\",\n            \"company_setup_configuration_update\",\n            \"company_setup_location\",\n            \"company_settings_update\",\n            \"location_create\",\n            \"location_store\",\n            \"location_edit\",\n            \"location_update\",\n            \"location_delete\",\n            \"locationApi\",\n            \"claim_read\",\n            \"claim_create\",\n            \"claim_update\",\n            \"claim_delete\",\n            \"payment_read\",\n            \"payment_create\",\n            \"payment_update\",\n            \"payment_delete\",\n            \"visit_menu\",\n            \"visit_read\",\n            \"visit_update\",\n            \"visit_view\",\n            \"app_settings_menu\",\n            \"app_settings_update\",\n            \"web_setup_menu\",\n            \"content_menu\",\n            \"content_read\",\n            \"content_update\",\n            \"content_delete\",\n            \"menu\",\n            \"menu_create\",\n            \"menu_store\",\n            \"menu_edit\",\n            \"menu_update\",\n            \"menu_delete\",\n            \"service_menu\",\n            \"service_create\",\n            \"service_store\",\n            \"portfolio_edit\",\n            \"service_update\",\n            \"service_delete\",\n            \"portfolio_menu\",\n            \"portfolio_create\",\n            \"portfolio_store\",\n            \"portfolio_edit\",\n            \"portfolio_update\",\n            \"portfolio_delete\",\n            \"contact_menu\",\n            \"contact_read\",\n            \"contact_create\",\n            \"contact_update\",\n            \"contact_delete\",\n            \"language_menu\",\n            \"language_create\",\n            \"language_edit\",\n            \"language_update\",\n            \"language_delete\",\n            \"make_default\",\n            \"setup_language\",\n            \"team_member_menu\",\n            \"team_member_read\",\n            \"team_member_create\",\n            \"team_member_store\",\n            \"team_member_edit\",\n            \"team_member_update\",\n            \"team_member_delete\",\n            \"support_menu\",\n            \"support_read\",\n            \"support_create\",\n            \"support_reply\",\n            \"support_delete\"\n        ],\n        \"time_wish\": {\n            \"wish\": \"response.Good Night\",\n            \"sub_title\": \"response.Have a good night\",\n            \"image\": \"https://hrm.onesttech.com/assets/app/dashboard/good-night.svg\"\n        },\n        \"time_zone\": \"Europe/Tirane\",\n        \"currency_symbol\": \"₹\",\n        \"currency_code\": \"INR\",\n        \"attendance_method\": \"QR\",\n        \"duty_schedule\": {\n            \"start_time\": {\n                \"hour\": 16,\n                \"min\": 55,\n                \"sec\": 0\n            },\n            \"end_time\": {\n                \"hour\": 17,\n                \"min\": 0,\n                \"sec\": 0\n            }\n        },\n        \"location_services\": {\n            \"google\": true,\n            \"barikoi\": false\n        },\n        \"google_api_key\": null,\n        \"barikoi_api\": {\n            \"key\": null,\n            \"secret\": null,\n            \"endpoint\": null,\n            \"status_id\": 4\n        },\n        \"break_status\": {\n            \"break_time\": \"\",\n            \"back_time\": \"\",\n            \"reason\": \"\",\n            \"created_at\": \"\",\n            \"updated_at\": \"\",\n            \"status\": \"break_out\",\n            \"diff_time\": \"\"\n        },\n        \"live_tracking\": {\n            \"app_sync_time\": \"\",\n            \"live_data_store_time\": \"\"\n        },\n        \"location_service\": true,\n        \"app_theme\": \"app_theme_3\",\n        \"is_team_lead\": true,\n        \"notification_channels\": [\n            \"user1\",\n            \"department1\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Home screen api",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/app/home-screen",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"app",
+								"home-screen"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Home screen api",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://hrm.onesttech.com/api/V11/app/home-screen",
+									"protocol": "https",
+									"host": [
+										"hrm",
+										"onesttech",
+										"com"
+									],
+									"path": [
+										"api",
+										"V11",
+										"app",
+										"home-screen"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 25 Jan 2024 14:53:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.26"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Xy27Hb9rbgWVTneQkDWKdqArsp1lrf%2BnFSWWj%2FI17CWOB4cNqvGufjElHNeSEQZoIiBl4wrjfnRcAtCeepZ%2BOgTmyfoymm%2FNa06KZ1g2p95jlRqNUnxDu8fnjRCmMBAIMrgOSQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "84b158b64ca5dad1-MIA"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"App home screen menus\",\n    \"data\": {\n        \"data\": [\n            {\n                \"name\": \"Support\",\n                \"slug\": \"support\",\n                \"position\": 1,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/support.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Attendance\",\n                \"slug\": \"attendance\",\n                \"position\": 2,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/attendance.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Task\",\n                \"slug\": \"task\",\n                \"position\": 3,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/task.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Notice\",\n                \"slug\": \"notice\",\n                \"position\": 4,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/notice.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Expense\",\n                \"slug\": \"expense\",\n                \"position\": 5,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/expense.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Leave\",\n                \"slug\": \"leave\",\n                \"position\": 6,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/leave.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Approval\",\n                \"slug\": \"approval\",\n                \"position\": 7,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/approval.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Phonebook\",\n                \"slug\": \"phonebook\",\n                \"position\": 8,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/phonebook.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Visit\",\n                \"slug\": \"visit\",\n                \"position\": 9,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/visit.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Appointments\",\n                \"slug\": \"appointments\",\n                \"position\": 10,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/appointments.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Break\",\n                \"slug\": \"break\",\n                \"position\": 11,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/break.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Report\",\n                \"slug\": \"report\",\n                \"position\": 12,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/report.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Payroll\",\n                \"slug\": \"payroll\",\n                \"position\": 13,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/payroll.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Conference\",\n                \"slug\": \"conference\",\n                \"position\": 14,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/conference.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Chat\",\n                \"slug\": \"chat\",\n                \"position\": 15,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/chat.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Daily Leave\",\n                \"slug\": \"daily_leave\",\n                \"position\": 16,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/daily_leave.png\",\n                \"image_type\": \"png\"\n            },\n            {\n                \"name\": \"Meeting\",\n                \"slug\": \"meeting\",\n                \"position\": 17,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/meeting.png\",\n                \"image_type\": \"png\"\n            }\n        ],\n        \"total_notice\": 3\n    }\n}"
+						},
+						{
+							"name": "Home screen api",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}/app/home-screen",
+									"host": [
+										"{{hrm_local}}"
+									],
+									"path": [
+										"app",
+										"home-screen"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "1431"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "253"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 15:11:21 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"App home screen menus\",\n    \"data\": {\n        \"data\": [\n            {\n                \"name\": \"Task\",\n                \"slug\": \"task\",\n                \"position\": 1,\n                \"icon\": \"https://hrm.onesttech.com/assets/appScreenIcons/task.png\",\n                \"image_type\": \"png\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Appoinment",
+			"item": [
+				{
+					"name": "Get List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"month\":\"2022-11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/appoinment/get-list",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"appoinment",
+								"get-list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get List",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"month\":\"2022-11\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}/appoinment/get-list",
+									"host": [
+										"{{hrm_local}}"
+									],
+									"path": [
+										"appoinment",
+										"get-list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "105"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "108"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 13:47:57 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"Event List\",\n    \"env\": \"local\",\n    \"status\": 200,\n    \"data\": {\n        \"items\": []\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Attendace",
+					"item": [
+						{
+							"name": "Checkin Checkout Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n  \"user_id\" : 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}/user/attendance/get-checkin-checkout-status",
+									"host": [
+										"{{hrm_local}}"
+									],
+									"path": [
+										"user",
+										"attendance",
+										"get-checkin-checkout-status"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Set Device Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/user/firebase-token",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"user",
+								"firebase-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Statistics",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/dashboard/statistics",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"dashboard",
+								"statistics"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Statistics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}/dashboard/statistics",
+									"host": [
+										"{{hrm_local}}"
+									],
+									"path": [
+										"dashboard",
+										"statistics"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "4156"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "13505"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 29 Jan 2024 21:19:58 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": false,\n    \"message\": \"\",\n    \"data\": {\n        \"today\": [\n            {\n                \"image\": \"https://hrm.onesttech.com/assets/app/dashboard/appoinment.png\",\n                \"title\": \"Appointments\",\n                \"slug\": \"appointment\",\n                \"number\": 0\n            }\n        ],\n        \"current_month\": [\n            {\n                \"image\": \"https://hrm.onesttech.com/assets/app/dashboard/lateIn.png\",\n                \"title\": \"Late In\",\n                \"slug\": \"late_in\",\n                \"number\": 0\n            }\n        ],\n        \"appoinment_list\": [],\n        \"upcoming_events\": [],\n        \"config\": {\n            \"is_admin\": true,\n            \"is_hr\": true,\n            \"is_manager\": true,\n            \"is_face_registered\": true,\n            \"multi_checkin\": true,\n            \"location_bind\": false,\n            \"is_ip_enabled\": false,\n            \"departments\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Management\"\n                },\n                {\n                    \"id\": 2,\n                    \"title\": \"IT\"\n                },\n                {\n                    \"id\": 3,\n                    \"title\": \"Sales\"\n                }\n            ],\n            \"designations\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Admin\"\n                },\n                {\n                    \"id\": 2,\n                    \"title\": \"HR\"\n                },\n                {\n                    \"id\": 3,\n                    \"title\": \"Staff\"\n                }\n            ],\n            \"employee_types\": [\n                \"Permanent\",\n                \"On Probation\",\n                \"Contractual\",\n                \"Intern\"\n            ],\n            \"permissions\": [\n                \"hr_menu\",\n                \"designation_read\",\n                \"designation_create\",\n                \"designation_update\",\n                \"designation_delete\",\n                \"department_read\",\n                \"department_create\",\n                \"department_update\",\n                \"department_delete\",\n                \"user_read\",\n                \"profile_view\",\n                \"user_create\",\n                \"user_edit\",\n                \"user_permission\",\n                \"user_update\",\n                \"user_delete\",\n                \"user_menu\",\n                \"make_hr\",\n                \"profile_image_view\",\n                \"user_device_list\",\n                \"reset_device\",\n                \"attendance_profile\",\n                \"phonebook_profile\",\n                \"support_ticket_profile\",\n                \"advance_profile\",\n                \"commission_profile\",\n                \"appointment_profile\",\n                \"visit_profile\",\n                \"leave_request_profile\",\n                \"notice_profile\",\n                \"salary_profile\",\n                \"project_profile\",\n                \"task_profile\",\n                \"award_profile\",\n                \"travel_profile\",\n                \"role_read\",\n                \"role_create\",\n                \"role_update\",\n                \"role_delete\",\n                \"branch_read\",\n                \"branch_create\",\n                \"branch_update\",\n                \"branch_delete\",\n                \"leave_type_read\",\n                \"leave_type_create\",\n                \"leave_type_update\",\n                \"leave_type_delete\",\n                \"leave_menu\",\n                \"leave_assign_read\",\n                \"leave_assign_create\",\n                \"leave_assign_update\",\n                \"leave_assign_delete\",\n                \"daily_leave_read\",\n                \"leave_request_read\",\n                \"leave_request_update\",\n                \"leave_request_store\",\n                \"leave_request_create\",\n                \"leave_request_approve\",\n                \"leave_request_reject\",\n                \"leave_request_delete\",\n                \"weekend_read\",\n                \"weekend_update\",\n                \"holiday_read\",\n                \"holiday_create\",\n                \"holiday_update\",\n                \"holiday_delete\",\n                \"schedule_read\",\n                \"schedule_create\",\n                \"schedule_update\",\n                \"schedule_delete\",\n                \"attendance_read\",\n                \"attendance_create\",\n                \"attendance_update\",\n                \"attendance_delete\",\n                \"attendance_menu\",\n                \"shift_read\",\n                \"shift_create\",\n                \"shift_update\",\n                \"shift_delete\",\n                \"shift_menu\",\n                \"payroll_menu\",\n                \"list_payroll_item\",\n                \"create_payroll_item\",\n                \"store_payroll_item\",\n                \"edit_payroll_item\",\n                \"update_payroll_item\",\n                \"delete_payroll_item\",\n                \"view_payroll_item\",\n                \"payroll_item_menu\",\n                \"list_payroll_set\",\n                \"create_payroll_set\",\n                \"store_payroll_set\",\n                \"edit_payroll_set\",\n                \"update_payroll_set\",\n                \"delete_payroll_set\",\n                \"view_payroll_set\",\n                \"payroll_set_menu\",\n                \"payslip_menu\",\n                \"salary_generate\",\n                \"salary_view\",\n                \"salary_delete\",\n                \"salary_edit\",\n                \"salary_update\",\n                \"salary_payment\",\n                \"payslip_list\",\n                \"announcement_menu\",\n                \"notice_menu\",\n                \"notice_list\",\n                \"notice_edit\",\n                \"notice_update\",\n                \"notice_create\",\n                \"notice_delete\",\n                \"advance_type_menu\",\n                \"advance_type_create\",\n                \"advance_type_store\",\n                \"advance_type_edit\",\n                \"advance_type_update\",\n                \"advance_type_delete\",\n                \"advance_type_view\",\n                \"advance_type_list\",\n                \"advance_salaries_menu\",\n                \"advance_salaries_create\",\n                \"advance_salaries_store\",\n                \"advance_salaries_edit\",\n                \"advance_salaries_update\",\n                \"advance_salaries_delete\",\n                \"advance_salaries_view\",\n                \"advance_salaries_approve\",\n                \"advance_salaries_list\",\n                \"advance_salaries_pay\",\n                \"advance_salaries_invoice\",\n                \"advance_salaries_search\",\n                \"salary_menu\",\n                \"salary_store\",\n                \"salary_edit\",\n                \"salary_update\",\n                \"salary_delete\",\n                \"salary_view\",\n                \"salary_list\",\n                \"salary_pay\",\n                \"salary_invoice\",\n                \"salary_approve\",\n                \"salary_generate\",\n                \"salary_calculate\",\n                \"salary_search\",\n                \"account_menu\",\n                \"account_create\",\n                \"account_store\",\n                \"account_edit\",\n                \"account_update\",\n                \"account_delete\",\n                \"account_view\",\n                \"account_list\",\n                \"account_search\",\n                \"deposit_menu\",\n                \"deposit_create\",\n                \"deposit_store\",\n                \"deposit_edit\",\n                \"deposit_update\",\n                \"deposit_delete\",\n                \"deposit_list\",\n                \"expense_menu\",\n                \"expense_create\",\n                \"expense_store\",\n                \"expense_edit\",\n                \"expense_update\",\n                \"expense_delete\",\n                \"expense_list\",\n                \"expense_approve\",\n                \"expense_invoice\",\n                \"expense_pay\",\n                \"expense_view\",\n                \"deposit_category_menu\",\n                \"deposit_category_create\",\n                \"deposit_category_store\",\n                \"deposit_category_edit\",\n                \"deposit_category_update\",\n                \"deposit_category_delete\",\n                \"deposit_category_list\",\n                \"payment_method_menu\",\n                \"payment_method_create\",\n                \"payment_method_store\",\n                \"payment_method_edit\",\n                \"payment_method_update\",\n                \"payment_method_delete\",\n                \"payment_method_list\",\n                \"transaction_menu\",\n                \"transaction_create\",\n                \"transaction_store\",\n                \"transaction_edit\",\n                \"transaction_update\",\n                \"transaction_delete\",\n                \"transaction_view\",\n                \"transaction_list\",\n                \"project_menu\",\n                \"project_create\",\n                \"project_store\",\n                \"project_edit\",\n                \"project_update\",\n                \"project_delete\",\n                \"project_view\",\n                \"project_list\",\n                \"project_activity_view\",\n                \"project_member_view\",\n                \"project_member_delete\",\n                \"project_complete\",\n                \"project_payment\",\n                \"project_invoice_view\",\n                \"project_discussion_create\",\n                \"project_discussion_store\",\n                \"project_discussion_edit\",\n                \"project_discussion_update\",\n                \"project_discussion_delete\",\n                \"project_discussion_view\",\n                \"project_discussion_list\",\n                \"project_discussion_comment\",\n                \"project_discussion_reply\",\n                \"project_file_create\",\n                \"project_file_store\",\n                \"project_file_edit\",\n                \"project_file_update\",\n                \"project_file_delete\",\n                \"project_file_view\",\n                \"project_file_list\",\n                \"project_file_download\",\n                \"project_file_comment\",\n                \"project_file_reply\",\n                \"project_notes_create\",\n                \"project_notes_store\",\n                \"project_notes_edit\",\n                \"project_notes_update\",\n                \"project_notes_delete\",\n                \"project_notes_list\",\n                \"project_files_comment\",\n                \"general_settings_read\",\n                \"general_settings_update\",\n                \"email_settings_update\",\n                \"storage_settings_update\",\n                \"task_menu\",\n                \"task_create\",\n                \"task_store\",\n                \"task_edit\",\n                \"task_update\",\n                \"task_delete\",\n                \"task_view\",\n                \"task_list\",\n                \"task_activity_view\",\n                \"task_assign_view\",\n                \"task_assign_delete\",\n                \"task_complete\",\n                \"client_menu\",\n                \"client_create\",\n                \"client_store\",\n                \"client_edit\",\n                \"client_update\",\n                \"client_delete\",\n                \"client_view\",\n                \"client_list\",\n                \"task_discussion_create\",\n                \"task_discussion_store\",\n                \"task_discussion_edit\",\n                \"task_discussion_update\",\n                \"task_discussion_delete\",\n                \"task_discussion_view\",\n                \"task_discussion_list\",\n                \"task_discussion_comment\",\n                \"task_discussion_reply\",\n                \"task_file_create\",\n                \"task_file_store\",\n                \"task_file_edit\",\n                \"task_file_update\",\n                \"task_file_delete\",\n                \"task_file_view\",\n                \"task_file_list\",\n                \"task_file_download\",\n                \"task_file_comment\",\n                \"task_file_reply\",\n                \"task_notes_create\",\n                \"task_notes_store\",\n                \"task_notes_edit\",\n                \"task_notes_update\",\n                \"task_notes_delete\",\n                \"task_notes_list\",\n                \"task_files_comment\",\n                \"award_type_menu\",\n                \"award_type_create\",\n                \"award_type_store\",\n                \"award_type_edit\",\n                \"award_type_update\",\n                \"award_type_delete\",\n                \"award_type_list\",\n                \"award_menu\",\n                \"award_create\",\n                \"award_store\",\n                \"award_edit\",\n                \"award_update\",\n                \"award_delete\",\n                \"award_view\",\n                \"award_list\",\n                \"travel_type_menu\",\n                \"travel_type_create\",\n                \"travel_type_store\",\n                \"travel_type_edit\",\n                \"travel_type_update\",\n                \"travel_type_delete\",\n                \"travel_type_list\",\n                \"travel_menu\",\n                \"travel_create\",\n                \"travel_store\",\n                \"travel_edit\",\n                \"travel_update\",\n                \"travel_delete\",\n                \"travel_view\",\n                \"travel_list\",\n                \"travel_approve\",\n                \"travel_payment\",\n                \"meeting_menu\",\n                \"meeting_create\",\n                \"meeting_store\",\n                \"meeting_edit\",\n                \"meeting_update\",\n                \"meeting_delete\",\n                \"meeting_view\",\n                \"meeting_list\",\n                \"appointment_menu\",\n                \"appointment_read\",\n                \"appointment_create\",\n                \"appointment_approve\",\n                \"appointment_reject\",\n                \"appointment_delete\",\n                \"performance_menu\",\n                \"performance_settings\",\n                \"performance_indicator_menu\",\n                \"performance_indicator_create\",\n                \"performance_indicator_store\",\n                \"performance_indicator_edit\",\n                \"performance_indicator_update\",\n                \"performance_indicator_delete\",\n                \"performance_indicator_list\",\n                \"performance_appraisal_menu\",\n                \"performance_appraisal_create\",\n                \"performance_appraisal_store\",\n                \"performance_appraisal_edit\",\n                \"performance_appraisal_update\",\n                \"performance_appraisal_delete\",\n                \"performance_appraisal_list\",\n                \"performance_appraisal_view\",\n                \"performance_goal_type_menu\",\n                \"performance_goal_type_create\",\n                \"performance_goal_type_store\",\n                \"performance_goal_type_edit\",\n                \"performance_goal_type_update\",\n                \"performance_goal_type_delete\",\n                \"performance_goal_type_list\",\n                \"performance_goal_menu\",\n                \"performance_goal_create\",\n                \"performance_goal_store\",\n                \"performance_goal_edit\",\n                \"performance_goal_update\",\n                \"performance_goal_delete\",\n                \"performance_goal_view\",\n                \"performance_goal_list\",\n                \"performance_competence_type_menu\",\n                \"performance_competence_type_create\",\n                \"performance_competence_type_store\",\n                \"performance_competence_type_edit\",\n                \"performance_competence_type_update\",\n                \"performance_competence_type_delete\",\n                \"performance_competence_type_list\",\n                \"performance_competence_menu\",\n                \"performance_competence_create\",\n                \"performance_competence_store\",\n                \"performance_competence_edit\",\n                \"performance_competence_update\",\n                \"performance_competence_delete\",\n                \"performance_competence_list\",\n                \"attendance_report_read\",\n                \"live_tracking_read\",\n                \"report_menu\",\n                \"leave_settings_read\",\n                \"leave_settings_update\",\n                \"ip_read\",\n                \"ip_create\",\n                \"ip_update\",\n                \"ip_delete\",\n                \"company_setup_menu\",\n                \"company_setup_activation\",\n                \"company_setup_activation_update\",\n                \"company_setup_configuration\",\n                \"company_setup_configuration_update\",\n                \"company_setup_location\",\n                \"company_settings_update\",\n                \"location_create\",\n                \"location_store\",\n                \"location_edit\",\n                \"location_update\",\n                \"location_delete\",\n                \"locationApi\",\n                \"claim_read\",\n                \"claim_create\",\n                \"claim_update\",\n                \"claim_delete\",\n                \"payment_read\",\n                \"payment_create\",\n                \"payment_update\",\n                \"payment_delete\",\n                \"visit_menu\",\n                \"visit_read\",\n                \"visit_update\",\n                \"visit_view\",\n                \"app_settings_menu\",\n                \"app_settings_update\",\n                \"web_setup_menu\",\n                \"content_menu\",\n                \"content_read\",\n                \"content_update\",\n                \"content_delete\",\n                \"menu\",\n                \"menu_create\",\n                \"menu_store\",\n                \"menu_edit\",\n                \"menu_update\",\n                \"menu_delete\",\n                \"service_menu\",\n                \"service_create\",\n                \"service_store\",\n                \"portfolio_edit\",\n                \"service_update\",\n                \"service_delete\",\n                \"portfolio_menu\",\n                \"portfolio_create\",\n                \"portfolio_store\",\n                \"portfolio_edit\",\n                \"portfolio_update\",\n                \"portfolio_delete\",\n                \"contact_menu\",\n                \"contact_read\",\n                \"contact_create\",\n                \"contact_update\",\n                \"contact_delete\",\n                \"language_menu\",\n                \"language_create\",\n                \"language_edit\",\n                \"language_update\",\n                \"language_delete\",\n                \"make_default\",\n                \"setup_language\",\n                \"team_member_menu\",\n                \"team_member_read\",\n                \"team_member_create\",\n                \"team_member_store\",\n                \"team_member_edit\",\n                \"team_member_update\",\n                \"team_member_delete\",\n                \"support_menu\",\n                \"support_read\",\n                \"support_create\",\n                \"support_reply\",\n                \"support_delete\"\n            ],\n            \"time_wish\": {\n                \"wish\": \"Good Evening\",\n                \"sub_title\": \"Thank you for your hard work today\",\n                \"image\": \"https://hrm.onesttech.com/assets/app/dashboard/good-evening.svg\"\n            },\n            \"time_zone\": \"Asia/Aden\",\n            \"currency_symbol\": \"$\",\n            \"currency_code\": \"USD\",\n            \"attendance_method\": \"QR\",\n            \"duty_schedule\": {\n                \"start_time\": {\n                    \"hour\": 16,\n                    \"min\": 55,\n                    \"sec\": 0\n                },\n                \"end_time\": {\n                    \"hour\": 17,\n                    \"min\": 0,\n                    \"sec\": 0\n                }\n            },\n            \"location_services\": {\n                \"google\": true,\n                \"barikoi\": false\n            },\n            \"google_api_key\": \"\",\n            \"barikoi_api\": {\n                \"key\": \"\",\n                \"secret\": \"\",\n                \"endpoint\": \"\",\n                \"status_id\": 4\n            },\n            \"break_status\": {\n                \"break_time\": \"\",\n                \"back_time\": \"\",\n                \"reason\": \"\",\n                \"created_at\": \"\",\n                \"updated_at\": \"\",\n                \"status\": \"break_out\",\n                \"diff_time\": \"\"\n            },\n            \"live_tracking\": {\n                \"app_sync_time\": \"\",\n                \"live_data_store_time\": \"\"\n            },\n            \"location_service\": true,\n            \"app_theme\": \"app_theme_1\",\n            \"is_team_lead\": true,\n            \"notification_channels\": [\n                \"user1\",\n                \"department1\"\n            ]\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Event & Holidays",
+			"item": [
+				{
+					"name": "Get List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"month\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrm_local}}/upcoming-events/get-list",
+							"host": [
+								"{{hrm_local}}"
+							],
+							"path": [
+								"upcoming-events",
+								"get-list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get List",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"month\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hrm_local}}/upcoming-events/get-list",
+									"host": [
+										"{{hrm_local}}"
+									],
+									"path": [
+										"upcoming-events",
+										"get-list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "115"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "342"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 13:51:39 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": true,\n    \"message\": \"Event List\",\n    \"env\": \"local\",\n    \"status\": 200,\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 1,\n                \"title\": \"New Year\",\n                \"description\": \"\",\n                \"date\": \"January 1\",\n                \"day\": \"Sunday\",\n                \"start_date\": \"January 1, 2023\",\n                \"attachment_file_id\": \"https://hrm.onesttech.com/static/blank_small.png\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

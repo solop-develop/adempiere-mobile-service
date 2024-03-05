@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_package = "org.spin.proto.mobile.upcoming_events";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+package upcoming_events;
+
+message GetListResponse {
+	bool result = 1;
+	string message = 2;
+	string env = 3;
+	int32 status = 4;
+	ListData data = 5;
+}
+
+message ListData {
+	repeated ListItem items = 1;
+}
+
+message ListItem {
+	int32 id = 1;
+	string title = 2;
+	string description = 3;
+	string date = 4;
+	string day = 5;
+	string start_date = 6;
+	string attachment_file_id = 7;
+}
+
+message GetListRequest {
+	string month = 1;
+}
+
+service UpcomingEventsService {
+	rpc GetList(GetListRequest) returns (GetListResponse) {
+		option (google.api.http) = {
+			post: "/upcoming-events/get-list"
+		};
+	}
+}

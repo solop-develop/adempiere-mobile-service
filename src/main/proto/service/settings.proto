@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+option java_package = "org.spin.proto.mobile.settings";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+package settings;
+
+message BaseSettings {
+	bool result = 1;
+	string message = 2;
+	BaseSettingsData data = 3;
+}
+
+message GetBaseSettingsRequest {
+
+}
+
+message KeyValueData {
+	int32 id = 1;
+	string title = 2;
+}
+
+message TimeWish {
+	string wish = 1;
+	string sub_title = 2;
+	string image = 3;
+}
+
+message DutySchedule {
+	TimeDefinition start_time = 1;
+	TimeDefinition end_time = 2;
+}
+
+message TimeDefinition {
+	int32 hour = 1;
+	int32 min = 2;
+	int32 sec = 3;
+}
+
+message LocationServices {
+	bool google = 1;
+	bool barikoi = 2;
+}
+
+message BarikoiApi {
+	string key = 1;
+	string secret = 2;
+	string endpoint = 3;
+	int32 status_id = 4;
+}
+
+message BreakStatus {
+	string break_time = 1;
+	string back_time = 2;
+	string reason = 3;
+	string created_at = 4;
+	string updated_at = 5;
+	string status = 6;
+	string diff_time = 7;
+}
+
+message LiveTracking {
+	string app_sync_time = 1;
+	string live_data_store_time = 2;
+}
+
+message BaseSettingsData {
+	bool is_admin = 1;
+	bool is_hr = 2;
+	bool is_manager = 3;
+	bool is_face_registered = 4;
+	bool multi_checkin = 5;
+	bool location_bind = 6;
+	bool is_ip_enabled = 7;
+	repeated KeyValueData departments = 8;
+	repeated KeyValueData designations = 9;
+	repeated string employee_types = 10;
+	repeated string permissions = 11;
+	TimeWish time_wish = 12;
+	string time_zone = 13;
+	string currency_symbol = 14;
+	string currency_code = 15;
+	string attendance_method = 16;
+	DutySchedule duty_schedule = 17;
+	LocationServices location_services = 18;
+	string google_api_key = 19;
+	BarikoiApi barikoi_api = 20;
+	BreakStatus break_status = 21;
+	LiveTracking live_tracking = 22;
+	bool location_service = 23;
+	string app_theme = 24;
+	bool is_team_lead = 25;
+	repeated string notification_channels = 26;
+}
+
+
+message HomeScreen {
+	bool result = 1;
+	string message = 2;
+	HomeScreenData data = 3;
+}
+
+message HomeScreenData {
+	repeated HomeScreenDataValue data = 1;
+}
+
+message HomeScreenDataValue {
+	string name = 1;
+	string slug = 2;
+	int32 position = 3;
+	string icon = 4;
+	string image_type = 5;
+}
+
+message GetHomeScreenRequest {
+
+}
+
+service SettingsService {
+	rpc GetBaseSettings(GetBaseSettingsRequest) returns (BaseSettings) {
+		option (google.api.http) = {
+			get: "/app/base-settings"
+		};
+	}
+
+	rpc GetHomeScreen(GetHomeScreenRequest) returns (HomeScreen) {
+		option (google.api.http) = {
+			get: "/app/home-screen"
+		};
+	}
+}
