@@ -38,8 +38,8 @@ import io.netty.handler.ssl.ClientAuth;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.ServerBuilder;
 
-public class OnestHRMServer {
-	private static final Logger logger = Logger.getLogger(OnestHRMServer.class.getName());
+public class MobileServer {
+	private static final Logger logger = Logger.getLogger(MobileServer.class.getName());
 
 	private Server server;
 
@@ -118,7 +118,7 @@ public class OnestHRMServer {
 			public void run() {
 				// Use stderr here since the logger may have been reset by its JVM shutdown hook.
 				logger.info("*** shutting down gRPC Server since JVM is shutting down");
-				OnestHRMServer.this.stop();
+				MobileServer.this.stop();
 				logger.info("*** server shut down");
 			}
 		});
@@ -154,7 +154,7 @@ public class OnestHRMServer {
 		SetupLoader.loadSetup(setupFileName);
 		//	Validate load
 		SetupLoader.getInstance().validateLoad();
-		final OnestHRMServer server = new OnestHRMServer();
+		final MobileServer server = new MobileServer();
 		server.start();
 		server.blockUntilShutdown();
 	}
