@@ -16,7 +16,7 @@ def privateDependencyBaseVersion = "adempiere-3.9.4"
 startScripts.enabled = false
 
 ext {
-	javaMainClass = "org.spin.mobile.server.MobileServer"
+	javaMainClass = "org.spin.mobile_service.server.MobileServer"
 }
 
 application {

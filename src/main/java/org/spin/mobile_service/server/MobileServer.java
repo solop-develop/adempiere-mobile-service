@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.server;
+package org.spin.mobile_service.server;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,13 +21,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.compiere.util.Env;
-import org.spin.mobile.controller.Appoinment;
-import org.spin.mobile.controller.Auth;
-import org.spin.mobile.controller.Dashboard;
-import org.spin.mobile.controller.Settings;
-import org.spin.mobile.controller.UpcomingEvents;
-import org.spin.mobile.controller.User;
-import org.spin.mobile.setup.SetupLoader;
+import org.spin.mobile_service.controller.Appoinment;
+import org.spin.mobile_service.controller.Auth;
+import org.spin.mobile_service.controller.Dashboard;
+import org.spin.mobile_service.controller.Settings;
+import org.spin.mobile_service.controller.UpcomingEvents;
+import org.spin.mobile_service.controller.User;
+import org.spin.mobile_service.setup.SetupLoader;
 import org.spin.service.grpc.authentication.AuthorizationServerInterceptor;
 import org.spin.service.grpc.context.ServiceContextProvider;
 

@@ -12,23 +12,33 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.util;
+package org.spin.mobile_service.controller;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import org.compiere.util.CLogger;
+import org.spin.mobile_service.service.user.UserService;
+import org.spin.proto.mobile.user.GetCheckinStatusRequest;
+import org.spin.proto.mobile.user.GetCheckinStatusResponse;
+import org.spin.proto.mobile.user.UserServiceGrpc.UserServiceImplBase;
 
-/**
- * @author Yamel Senih, ysenih@erpya.com, ERPCyA http://www.erpya.com
- * Global changes for server
- */
-public class GlobalValues {
-	public static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
-	public static final String MEDIUM_DATE_FORMAT = "dd MMM yyyy";
-	public static final String MEDIUM_DATE_FORMAT_DD_MMM = "dd MMM";
-	public static final String ONLY_DAY = "EEEE";
+import io.grpc.Status;
+import io.grpc.stub.StreamObserver;
+
+public class User extends UserServiceImplBase {
 	
+	/**	Logger			*/
+	private CLogger log = CLogger.getCLogger(User.class);
 	
-	public static String getFormattedDate(Timestamp date, String formatDate) {
-		return new SimpleDateFormat(formatDate).format(date);
+	@Override
+	public void getCheckinStatus(GetCheckinStatusRequest request, StreamObserver<GetCheckinStatusResponse> responseObserver) {
+		try {
+			responseObserver.onNext(UserService.getCheckinStatus(request));
+			responseObserver.onCompleted();
+		} catch (Exception e) {
+			log.severe(e.getLocalizedMessage());
+			responseObserver.onError(Status.INTERNAL
+					.withDescription(e.getLocalizedMessage())
+					.withCause(e)
+					.asRuntimeException());
+		}
 	}
 }

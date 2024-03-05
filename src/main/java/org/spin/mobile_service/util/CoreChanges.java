@@ -1,5 +1,5 @@
 /************************************************************************************
- * Copyright (C) 2012-2018 E.R.P. Consultores y Asociados, C.A.                     *
+ * Copyright (C) 2012-present E.R.P. Consultores y Asociados, C.A.                  *
  * Contributor(s): Yamel Senih ysenih@erpya.com                                     *
  * This program is free software: you can redistribute it and/or modify             *
  * it under the terms of the GNU General Public License as published by             *
@@ -12,33 +12,13 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.controller;
+package org.spin.mobile_service.util;
 
-import org.compiere.util.CLogger;
-import org.spin.proto.mobile.dashboard.DashboardServiceGrpc.DashboardServiceImplBase;
-import org.spin.mobile.service.dashboard.DashboardService;
-import org.spin.proto.mobile.dashboard.GetStatisticsRequest;
-import org.spin.proto.mobile.dashboard.GetStatisticsResponse;
-
-import io.grpc.Status;
-import io.grpc.stub.StreamObserver;
-
-public class Dashboard extends DashboardServiceImplBase {
-	
-	/**	Logger			*/
-	private CLogger log = CLogger.getCLogger(Dashboard.class);
-
-	@Override
-	public void getStatistics(GetStatisticsRequest request, StreamObserver<GetStatisticsResponse> responseObserver) {
-		try {
-			responseObserver.onNext(DashboardService.getStatistics(request));
-			responseObserver.onCompleted();
-		} catch (Exception e) {
-			log.severe(e.getLocalizedMessage());
-			responseObserver.onError(Status.INTERNAL
-					.withDescription(e.getLocalizedMessage())
-					.withCause(e)
-					.asRuntimeException());
-		}
-	}
+/**
+ * @author Yamel Senih, ysenih@erpya.com, ERPCyA http://www.erpya.com
+ * ADempiere Core changes
+ */
+public class CoreChanges {
+	public static final String COLUMNNAME_OHRM_IsAppUsed = "OHRM_IsAppUsed";
+	public static final String COLUMNNAME_OHRM_Color = "OHRM_ColorCode";
 }

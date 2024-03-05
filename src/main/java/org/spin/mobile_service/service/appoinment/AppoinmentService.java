@@ -12,24 +12,26 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.service.user;
+package org.spin.mobile_service.service.appoinment;
 
-import org.spin.proto.mobile.user.CheckinData;
-import org.spin.proto.mobile.user.GetCheckinStatusRequest;
-import org.spin.proto.mobile.user.GetCheckinStatusResponse;
+import org.spin.proto.mobile.appoinment.GetListRequest;
+import org.spin.proto.mobile.appoinment.GetListResponse;
+import org.spin.proto.mobile.appoinment.ListData;
+import org.spin.proto.mobile.appoinment.ListItem;
 
-
-public class UserService {
+public class AppoinmentService {
 	
-	public static GetCheckinStatusResponse getCheckinStatus(GetCheckinStatusRequest chekToken) {
-		
-		CheckinData.Builder data = CheckinData.newBuilder()
+	public static GetListResponse getList(GetListRequest chekToken) {
+		ListData.Builder data = ListData.newBuilder()
+				.addItems(ListItem.newBuilder().setId(1).setTitle("New Year").setDate("January 1").setDay("Sunday").setStartDate("January 1, 2023").setAttachmentFileId("https://hrm.onesttech.com/static/blank_small.png"))
 				;
 		
-		return GetCheckinStatusResponse.newBuilder()
+		return GetListResponse.newBuilder()
 				.setData(data)
 				.setResult(true)
-				.setMessage("Please check in now")
+				.setEnv("local")
+				.setMessage("Event List")
+				.setStatus(200)
 				.build();
 	}
 }

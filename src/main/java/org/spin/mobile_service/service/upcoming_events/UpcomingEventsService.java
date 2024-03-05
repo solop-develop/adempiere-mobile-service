@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.service.upcoming_events;
+package org.spin.mobile_service.service.upcoming_events;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import org.adempiere.core.domains.models.I_R_Request;
 import org.compiere.model.MRequest;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
-import org.spin.mobile.util.GlobalValues;
+import org.spin.mobile_service.util.GlobalValues;
 import org.spin.proto.mobile.upcoming_events.GetListRequest;
 import org.spin.proto.mobile.upcoming_events.GetListResponse;
 import org.spin.proto.mobile.upcoming_events.ListData;

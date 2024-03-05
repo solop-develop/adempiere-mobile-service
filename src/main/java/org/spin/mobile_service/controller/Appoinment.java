@@ -12,30 +12,33 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.service.dashboard;
+package org.spin.mobile_service.controller;
 
-import org.spin.mobile.service.settings.SettingsService;
-import org.spin.proto.mobile.dashboard.GetStatisticsRequest;
-import org.spin.proto.mobile.dashboard.GetStatisticsResponse;
-import org.spin.proto.mobile.dashboard.Statistic;
+import org.compiere.util.CLogger;
+import org.spin.proto.mobile.appoinment.AppoinmentServiceGrpc.AppoinmentServiceImplBase;
+import org.spin.mobile_service.service.appoinment.AppoinmentService;
+import org.spin.proto.mobile.appoinment.GetListRequest;
+import org.spin.proto.mobile.appoinment.GetListResponse;
 
-public class DashboardService {
-	public static GetStatisticsResponse getStatistics(GetStatisticsRequest request) {
-		GetStatisticsResponse.Builder response = GetStatisticsResponse.newBuilder();
-		Statistic.Builder data = Statistic.newBuilder();
-		data.setConfig(SettingsService.getBaseSettings().getData());
-//		data.addToday(StatisticData.newBuilder()
-//				.setImage("https://hrm.onesttech.com/assets/app/dashboard/appoinment.png")
-//				.setTitle("Appointments")
-//				.setSlug("appointment")
-//				.setNumber(0)
-//				);
-//		data.addCurrentMonth(StatisticData.newBuilder()
-//				.setImage("https://hrm.onesttech.com/assets/app/dashboard/lateIn.png")
-//				.setTitle("Late In")
-//				.setSlug("late_in")
-//				.setNumber(0));
-		response.setData(data);
-		return response.build();
+import io.grpc.Status;
+import io.grpc.stub.StreamObserver;
+
+public class Appoinment extends AppoinmentServiceImplBase {
+	
+	/**	Logger			*/
+	private CLogger log = CLogger.getCLogger(Appoinment.class);
+	
+	@Override
+	public void getList(GetListRequest request, StreamObserver<GetListResponse> responseObserver) {
+		try {
+			responseObserver.onNext(AppoinmentService.getList(request));
+			responseObserver.onCompleted();
+		} catch (Exception e) {
+			log.severe(e.getLocalizedMessage());
+			responseObserver.onError(Status.INTERNAL
+					.withDescription(e.getLocalizedMessage())
+					.withCause(e)
+					.asRuntimeException());
+		}
 	}
 }

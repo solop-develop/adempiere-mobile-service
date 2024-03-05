@@ -12,10 +12,10 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.controller;
+package org.spin.mobile_service.controller;
 
 import org.compiere.util.CLogger;
-import org.spin.mobile.service.upcoming_events.UpcomingEventsService;
+import org.spin.mobile_service.service.upcoming_events.UpcomingEventsService;
 import org.spin.proto.mobile.upcoming_events.GetListRequest;
 import org.spin.proto.mobile.upcoming_events.GetListResponse;
 import org.spin.proto.mobile.upcoming_events.UpcomingEventsServiceGrpc.UpcomingEventsServiceImplBase;

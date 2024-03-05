@@ -12,10 +12,10 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.controller;
+package org.spin.mobile_service.controller;
 
 import org.compiere.util.CLogger;
-import org.spin.mobile.service.settings.SettingsService;
+import org.spin.mobile_service.service.settings.SettingsService;
 import org.spin.proto.mobile.settings.BaseSettings;
 import org.spin.proto.mobile.settings.GetBaseSettingsRequest;
 import org.spin.proto.mobile.settings.GetHomeScreenRequest;

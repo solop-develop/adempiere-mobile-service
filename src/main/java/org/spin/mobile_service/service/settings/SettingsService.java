@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License                *
  * along with this program. If not, see <https://www.gnu.org/licenses/>.            *
  ************************************************************************************/
-package org.spin.mobile.service.settings;
+package org.spin.mobile_service.service.settings;
 
 import java.time.ZoneId;
 import java.util.Arrays;
