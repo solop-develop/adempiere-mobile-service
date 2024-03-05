@@ -99,7 +99,7 @@ public class AuthService {
 				.setId(userId)
 				//	TODO: Add real data
 				.setIsFaceRegistered(false)
-				.setAvatar("https://hrm.onesttech.com/static/blank_small.png")
+				.setAvatar("https://www.adempiere.io/assets/icon/logo.png")
 				;
 		//	Get employee data
 		if(user.getC_BPartner_ID() > 0) {
