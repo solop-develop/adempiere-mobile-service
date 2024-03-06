@@ -102,6 +102,16 @@ This project depends of [adempiere-mobile-changes](https://github.com/adempiere/
 - `/upcoming-events/get-list`
 
 
+## What else?
+- You can login with the follow data:
+  - User: `app`
+  - Password: `app`
+- The seed database have all related to Mobile Application:
+  - User
+  - Role
+  - Test Roles
+  - Dictionary Changes
+
 **Some utils**
 
 ```Shell
