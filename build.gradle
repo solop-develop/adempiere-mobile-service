@@ -154,6 +154,7 @@ dependencies {
 	implementation "${baseGroupId}:base:${baseVersion}"
 	implementation "${baseGroupId}:adempiere-grpc-utils:1.2.6"
 	implementation "${baseGroupId}:human-resource-and-payroll:${baseVersion}"
+	implementation "${baseGroupId}:adempiere-mobile-changes:1.0.0"
 	//	Others
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
 }
