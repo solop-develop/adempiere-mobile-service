@@ -15,14 +15,18 @@
 package org.spin.mobile_service.service.upcoming_events;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.adempiere.core.domains.models.I_C_NonBusinessDay;
 import org.adempiere.core.domains.models.I_R_Request;
+import org.compiere.model.MNonBusinessDay;
 import org.compiere.model.MRequest;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
+import org.compiere.util.TimeUtil;
 import org.spin.mobile_service.util.GlobalValues;
 import org.spin.proto.mobile.upcoming_events.GetListRequest;
 import org.spin.proto.mobile.upcoming_events.GetListResponse;
@@ -56,6 +60,18 @@ public class UpcomingEventsService {
 					.setStartDate(GlobalValues.getFormattedDate(startDate, GlobalValues.MEDIUM_DATE_FORMAT_DD_MMM))
 					.setAttachmentFileId("https://hrm.onesttech.com/static/blank_small.png"));
 		});
+		getMonthlyEventsIds().forEach(nonBusinessDayId -> {
+			MNonBusinessDay nonBusinessDay = new MNonBusinessDay(Env.getCtx(), nonBusinessDayId, null);
+			data.addItems(
+					ListItem.newBuilder()
+					.setId(nonBusinessDayId)
+					.setTitle(Optional.ofNullable(nonBusinessDay.getName()).orElse("--"))
+					.setDate(new SimpleDateFormat(GlobalValues.MEDIUM_DATE_FORMAT_DD_MMM).format(nonBusinessDay.getDate1()))
+					.setDay(new SimpleDateFormat(GlobalValues.ONLY_DAY).format(nonBusinessDay.getDate1()))
+					.setStartDate(new SimpleDateFormat(GlobalValues.MEDIUM_DATE_FORMAT_DD_MMM).format(nonBusinessDay.getDate1()))
+					.setAttachmentFileId("https://hrm.onesttech.com/static/blank_small.png"))
+			;
+		});
 		return GetListResponse.newBuilder()
 				.setData(data)
 				.setResult(true)
@@ -85,5 +101,13 @@ public class UpcomingEventsService {
 			.setParameters(parameters)
 			.setClient_ID()
 			.getIDsAsList();
+	}
+	
+	private static List<Integer> getMonthlyEventsIds() {
+		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+		return new Query(Env.getCtx(), I_C_NonBusinessDay.Table_Name, "Date1 >= ? AND Date1 <= ?", null)
+				.setParameters(currentDate, TimeUtil.addMonths(currentDate, 1))
+				.setOrderBy(I_C_NonBusinessDay.COLUMNNAME_Date1)
+				.getIDsAsList();
 	}
 }

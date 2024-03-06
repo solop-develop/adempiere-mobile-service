@@ -22,6 +22,7 @@ import org.adempiere.core.domains.models.I_C_NonBusinessDay;
 import org.compiere.model.MNonBusinessDay;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
+import org.spin.mobile_service.util.GlobalValues;
 import org.spin.proto.mobile.appoinment.GetListRequest;
 import org.spin.proto.mobile.appoinment.GetListResponse;
 import org.spin.proto.mobile.appoinment.ListData;
@@ -41,14 +42,12 @@ public class AppoinmentService {
 					ListItem.newBuilder()
 					.setId(nonBusinessDayId)
 					.setTitle(Optional.ofNullable(nonBusinessDay.getName()).orElse("--"))
-					.setDate(new SimpleDateFormat("MMMM dd").format(nonBusinessDay.getDate1()))
-					.setDay(new SimpleDateFormat("EEEE").format(nonBusinessDay.getDate1()))
-					.setStartDate(new SimpleDateFormat("MMMM dd, yyyy").format(nonBusinessDay.getDate1()))
+					.setDate(new SimpleDateFormat(GlobalValues.MEDIUM_DATE_FORMAT_DD_MMM).format(nonBusinessDay.getDate1()))
+					.setDay(new SimpleDateFormat(GlobalValues.ONLY_DAY).format(nonBusinessDay.getDate1()))
+					.setStartDate(new SimpleDateFormat(GlobalValues.MEDIUM_DATE_FORMAT_DD_MMM).format(nonBusinessDay.getDate1()))
 					.setAttachmentFileId("https://hrm.onesttech.com/static/blank_small.png"))
 			;
 		});
-		
-				
 		
 		return GetListResponse.newBuilder()
 				.setData(data)
