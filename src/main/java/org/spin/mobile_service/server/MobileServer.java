@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-
 import org.compiere.util.Env;
+import org.spin.mobile_service.controller.Adempiere;
 import org.spin.mobile_service.controller.Appoinment;
 import org.spin.mobile_service.controller.Auth;
 import org.spin.mobile_service.controller.Dashboard;
@@ -110,6 +110,7 @@ public class MobileServer {
 			.addService(new Appoinment())
 			.addService(new User())
 			.addService(new Dashboard())
+			.addService(new Adempiere())
 			;
 		this.server = serverBuilder.build().start();
 		logger.info("Server started, listening on " + SetupLoader.getInstance().getServer().getPort());

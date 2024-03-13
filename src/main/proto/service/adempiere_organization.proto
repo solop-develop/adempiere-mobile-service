@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_package = "org.spin.proto.mobile.adempiere";
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+
+package adempiere;
+
+// Organization
+message Organization {
+	int32 id = 1;
+	string value = 2;
+	string name = 3;
+	string description = 4;
+}
+message ListOrganizationsRequest {
+	string filters = 1;
+	string sort_by = 2;
+	repeated string group_columns = 3;
+	repeated string select_columns = 4;
+	int32 page_size = 5;
+	string page_token = 6;
+	string search_value = 7;
+}
+message ListOrganizationsResponse {
+	int64 record_count = 1;
+	repeated Organization organizations = 2;
+	string next_page_token = 3;
+}
+
+service AdempieresService {
+	rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
+		option (google.api.http) = {
+			get: "/adempiere/organizations"
+		};
+	}
+}
