@@ -43,6 +43,7 @@ static_resources:
                 - appoinment.AppoinmentService
                 - user.UserService
                 - dashboard.DashboardService
+                - adempiere.AdempieresService
               print_options:
                 add_whitespace: true
                 always_print_primitive_fields: true

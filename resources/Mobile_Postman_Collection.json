@@ -852,6 +852,131 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "ADempiere",
+			"item": [
+				{
+					"name": "Organizations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend_url}}/adempiere/organizations",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"adempiere",
+								"organizations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Organizations",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backend_url}}/adempiere/organizations",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"adempiere",
+										"organizations"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "grpc-encoding",
+									"value": "identity"
+								},
+								{
+									"key": "grpc-accept-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "327"
+								},
+								{
+									"key": "grpc-status",
+									"value": "0"
+								},
+								{
+									"key": "content-length",
+									"value": "1017"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 13 Mar 2024 20:04:52 GMT"
+								},
+								{
+									"key": "server",
+									"value": "envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"record_count\": \"9\",\n    \"organizations\": [\n        {\n            \"id\": 11,\n            \"value\": \"HQ\",\n            \"name\": \"HQ\",\n            \"description\": \"GardenWorld HQ!\"\n        },\n        {\n            \"id\": 12,\n            \"value\": \"Store Central\",\n            \"name\": \"Store Central\",\n            \"description\": \"GardenWorld Store!\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"Furniture\",\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Fertilizer\",\n            \"name\": \"Fertilizer\",\n            \"description\": \"Fertilizer\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Store North\",\n            \"name\": \"Store North\",\n            \"description\": \"Store North\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store South\",\n            \"name\": \"Store South\",\n            \"description\": \"Store South\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"name\": \"Store East\",\n            \"description\": \"Store East\"\n        },\n        {\n            \"id\": 50006,\n            \"value\": \"Store West\",\n            \"name\": \"Store West\",\n            \"description\": \"Store West\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"Stores\",\n            \"name\": \"Stores\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+						}
+					]
+				}
+			]
 		}
 	]
 }
