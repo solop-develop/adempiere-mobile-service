@@ -30,6 +30,7 @@ import org.spin.service.grpc.util.db.LimitUtil;
 import org.spin.service.grpc.util.value.ValueManager;
 
 public class AdempiereService {
+
 	public static ListOrganizationsResponse.Builder listOrganizations(ListOrganizationsRequest request) {
 		String whereClause = "AD_Org_ID > 0";
 		List<Object> parameters = new ArrayList<Object>();
@@ -71,7 +72,7 @@ public class AdempiereService {
 			nexPageToken = LimitUtil.getPagePrefix(SessionManager.getSessionUuid()) + (pageNumber + 1);
 		}
 
-		ListOrganizationsResponse.Builder builderList = ListOrganizationsResponse.newBuilder()
+		ListOrganizationsResponse.Data.Builder dataBuilder = ListOrganizationsResponse.Data.newBuilder()
 			.setRecordCount(count)
 			.setNextPageToken(nexPageToken)
 		;
@@ -80,21 +81,28 @@ public class AdempiereService {
 			.getIDsAsList()
 			.forEach(organizationId -> {
 				Organization.Builder builder = convertOrganization(organizationId);
-				builderList.addOrganizations(builder);
+				dataBuilder.addOrganizations(builder);
 			})
 		;
 
-		return builderList;
+		ListOrganizationsResponse.Builder responseBuilder = ListOrganizationsResponse.newBuilder()
+			.setResult(true)
+			.setData(dataBuilder)
+		;
+		return responseBuilder;
 	}
-	
+
+
 	private static Organization.Builder convertOrganization(int organizationId) {
+		if (organizationId <= 0) {
+			return Organization.newBuilder();
+		}
 		MOrg organization = MOrg.get(Env.getCtx(), organizationId);
 		return convertOrganization(organization);
 	}
-	
 	private static Organization.Builder convertOrganization(MOrg organization) {
 		Organization.Builder builder = Organization.newBuilder();
-		if (organization == null || organization.getAD_Org_ID() < 0) {
+		if (organization == null || organization.getAD_Org_ID() <= 0) {
 			return builder;
 		}
 		builder.setId(
@@ -118,4 +126,5 @@ public class AdempiereService {
 		;
 		return builder;
 	}
+
 }

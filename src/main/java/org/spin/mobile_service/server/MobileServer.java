@@ -111,7 +111,7 @@ public class MobileServer {
 			.addService(new User())
 			.addService(new Dashboard())
 			.addService(new Adempiere())
-			;
+		;
 		this.server = serverBuilder.build().start();
 		logger.info("Server started, listening on " + SetupLoader.getInstance().getServer().getPort());
 		Runtime.getRuntime().addShutdownHook(new Thread() {
