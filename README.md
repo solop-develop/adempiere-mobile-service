@@ -95,12 +95,14 @@ This project depends of [adempiere-mobile-changes](https://github.com/adempiere/
 
 - `/login`
 - `/check-token`
+- `/logout`
 - `/adempiere/organizations`
 - `/app/base-settings`
 - `/app/home-screen`
 - `/appoinment/get-list`
 - `/dashboard/statistics`
 - `/upcoming-events/get-list`
+- `/user/attendance/get-checkin-checkout-status`
 
 
 ## What else?
