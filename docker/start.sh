@@ -2,7 +2,7 @@
 # @autor Yamel Senih <ysenih@erpya.com>
 
 # Set server values
-sed -i "s|50059|$SERVER_PORT|g" env.yaml
+sed -i "s|50062|$SERVER_PORT|g" env.yaml
 sed -i "s|WARNING|$SERVER_LOG_LEVEL|g" env.yaml
 
 export DEFAULT_JAVA_OPTIONS='"-Xms64M" "-Xmx1512M"'
