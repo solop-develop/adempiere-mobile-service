@@ -24,7 +24,7 @@ For Token validation is used [JWT](https://www.viralpatel.net/java-create-valida
 ## Run with Docker
 
 ```Shell
-docker pull solopcloud/adempiere-mobile-service:latest
+docker pull openls/adempiere-mobile-service:latest
 ```
 
 ### Minimal Docker Requirements
@@ -37,17 +37,17 @@ To use this Docker image you must have your Docker engine version greater than o
 - `DB_NAME`: Database name that adempiere-mobile-service will use to connect with the database. Default: `adempiere`
 - `DB_USER`: Database user that adempiere-mobile-service will use to connect with the database. Default: `adempiere`
 - `DB_PASSWORD`: Database password that Adempiere-Backend will use to connect with the database. Default: `adempiere`
-- `SERVER_PORT`: Port to access adempiere-mobile-service from outside of the container. Default: `50059`
+- `SERVER_PORT`: Port to access adempiere-mobile-service from outside of the container. Default: `50062`
 - `SERVER_LOG_LEVEL`: Log Level. Default: `WARNING`
 - `TZ`: (Time Zone) Indicates the time zone to set in the nginx-based container, the default value is `America/Caracas` (UTC -4:00).
 
 You can download the last image from docker hub, just run the follow command:
 
 ```Shell
-docker run -d -p 50059:50059 --name adempiere-mobile-service -e DB_HOST="localhost" -e DB_PORT=5432 -e DB_NAME="adempiere" -e DB_USER="adempiere" -e DB_PASSWORD="adempiere" solopcloud/adempiere-mobile-service:latest
+docker run -d -p 50062:50062 --name adempiere-mobile-service -e DB_HOST="localhost" -e DB_PORT=5432 -e DB_NAME="adempiere" -e DB_USER="adempiere" -e DB_PASSWORD="adempiere" openls/adempiere-mobile-service:latest
 ```
 
-See all images [here](https://hub.docker.com/r/solopcloud/adempiere-mobile-service)
+See all images [here](https://hub.docker.com/r/openls/adempiere-mobile-service)
 
 ## Run with Docker Compose
 

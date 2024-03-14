@@ -1,11 +1,11 @@
-FROM eclipse-temurin:11-jdk-alpine
+FROM eclipse-temurin:11.0.22_7-jdk-focal
 
-LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com" \
-	description="Backend gRPC"
+LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
+	description="ADempiere Mobile gRPC Service"
 
 # Init ENV with default values
 ENV \
-	SERVER_PORT="50059" \
+	SERVER_PORT="50062" \
 	SERVER_LOG_LEVEL="WARNING" \
 	DB_HOST="localhost" \
 	DB_PORT="5432" \

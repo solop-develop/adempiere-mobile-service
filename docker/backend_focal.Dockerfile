@@ -1,7 +1,7 @@
-FROM eclipse-temurin:11-jdk-focal
+FROM eclipse-temurin:11.0.22_7-jdk-focal
 
-LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com" \
-	description="Backend gRPC"
+LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
+	description="ADempiere Mobile gRPC Service"
 
 # Init ENV with default values
 ENV \
