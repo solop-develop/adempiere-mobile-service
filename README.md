@@ -95,6 +95,7 @@ This project depends of [adempiere-mobile-changes](https://github.com/adempiere/
 
 - `/login`
 - `/check-token`
+- `/adempiere/organizations`
 - `/app/base-settings`
 - `/app/home-screen`
 - `/appoinment/get-list`
