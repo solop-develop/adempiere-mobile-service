@@ -6,9 +6,9 @@
 	"configurations": [
 		{
 			"type": "java",
-			"name": "ADmempiere gRPC Template",
+			"name": "ADmempiere gRPC Mobile Service",
 			"request": "launch",
-			"mainClass": "org.spin.mobile.server.OnestHRMServer",
+			"mainClass": "org.spin.mobile_service.server.MobileServer",
 			"projectName": "adempiere-mobile-service",
 			"env": {
 				"ADEMPIERE_APPS_TYPE": "wildfly",
