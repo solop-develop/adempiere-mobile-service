@@ -64,7 +64,7 @@ public class AuthService {
 		Login login = new Login(Env.getCtx());
 		int userId = login.getAuthenticatedUserId(loginRequest.getEmail(), loginRequest.getPassword());
 		//	Get Values from role
-		if(userId < 0) {
+		if(userId <= 0) {
 			throw new AdempiereException("@AD_User_ID@ / @AD_Role_ID@ / @AD_Org_ID@ @NotFound@");
 		}
 		MUser user = MUser.get(Env.getCtx(), userId);
@@ -88,7 +88,15 @@ public class AuthService {
 			warehouseId = SessionManager.getDefaultWarehouseId(organizationId);
 		}
 		//	Session values
-		final String bearerToken = SessionManager.createSession(loginRequest.getDeviceInfo(), Language.AD_Language_en_US, roleId, userId, organizationId, warehouseId);
+		final String bearerToken = SessionManager.createSessionAndGetToken(
+			loginRequest.getDeviceInfo(),
+			Language.AD_Language_en_US,
+			roleId,
+			userId,
+			organizationId,
+			warehouseId,
+			false
+		);
 		LoginResponseData.Builder loginData = LoginResponseData.newBuilder()
 				.setToken(bearerToken)
 				.setName(user.getName())
@@ -100,7 +108,7 @@ public class AuthService {
 				//	TODO: Add real data
 				.setIsFaceRegistered(false)
 				.setAvatar("https://www.adempiere.io/assets/icon/logo.png")
-				;
+		;
 		//	Get employee data
 		if(user.getC_BPartner_ID() > 0) {
 			MHREmployee employee = MHREmployee.getActiveEmployee(Env.getCtx(), user.getC_BPartner_ID(), null);
