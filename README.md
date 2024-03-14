@@ -24,7 +24,7 @@ For Token validation is used [JWT](https://www.viralpatel.net/java-create-valida
 ## Run with Docker
 
 ```Shell
-docker pull solopcloud/adempiere-mobile-service:latest
+docker pull openls/adempiere-mobile-service:latest
 ```
 
 ### Minimal Docker Requirements
@@ -44,10 +44,10 @@ To use this Docker image you must have your Docker engine version greater than o
 You can download the last image from docker hub, just run the follow command:
 
 ```Shell
-docker run -d -p 50062:50062 --name adempiere-mobile-service -e DB_HOST="localhost" -e DB_PORT=5432 -e DB_NAME="adempiere" -e DB_USER="adempiere" -e DB_PASSWORD="adempiere" solopcloud/adempiere-mobile-service:latest
+docker run -d -p 50062:50062 --name adempiere-mobile-service -e DB_HOST="localhost" -e DB_PORT=5432 -e DB_NAME="adempiere" -e DB_USER="adempiere" -e DB_PASSWORD="adempiere" openls/adempiere-mobile-service:latest
 ```
 
-See all images [here](https://hub.docker.com/r/solopcloud/adempiere-mobile-service)
+See all images [here](https://hub.docker.com/r/openls/adempiere-mobile-service)
 
 ## Run with Docker Compose
 
