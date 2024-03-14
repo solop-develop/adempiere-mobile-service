@@ -24,9 +24,14 @@ message ListOrganizationsRequest {
 	string search_value = 7;
 }
 message ListOrganizationsResponse {
-	int64 record_count = 1;
-	repeated Organization organizations = 2;
-	string next_page_token = 3;
+	bool result = 1;
+	string message = 2;
+	message Data {
+		int64 record_count = 1;
+		repeated Organization organizations = 2;
+		string next_page_token = 3;
+	}
+	Data data = 3;
 }
 
 service AdempieresService {
