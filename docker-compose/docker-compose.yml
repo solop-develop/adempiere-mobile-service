@@ -26,12 +26,14 @@ services:
     networks:
       - shared_network
 
+
+
   adempiere.grpc.server:
     image: ${GRPC_SERVER_IMAGE}
     container_name: ${GRPC_SERVER_HOST}
     restart: ${GENERIC_RESTART}
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50062; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
@@ -47,6 +49,8 @@ services:
       JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
     networks:
       - shared_network
+
+
 
   grpc.proxy:
     image: ${GRPC_PROXY_IMAGE}
@@ -67,6 +71,8 @@ services:
     networks:
     - shared_network
 
+
+
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
     container_name: ${ADEMPIERE_ZK_HOST}
@@ -75,6 +81,7 @@ services:
       - ${ADEMPIERE_ZK_PORT}:8080
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_HOST}
+      ADEMPIERE_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
     depends_on:
@@ -82,6 +89,8 @@ services:
         condition: service_healthy
     networks:
       - shared_network
+
+
 
 networks:
   shared_network:

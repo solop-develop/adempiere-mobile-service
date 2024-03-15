@@ -82,7 +82,7 @@ You can change variables editing the `.env` file. Note that this file have a min
 ### Where is the service?
 
 - ZK service by default is launched at [[here](http://localhost:8080)](http://localhost:8080/webui/timeout.zul)
-- The Mobile service is launched at 50059 port
+- The Mobile service is launched at 50062 port
 
 **Note:** For Postman collection you can import the file located at `resources/Mobile_Postman_Collection.json`
 
