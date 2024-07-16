@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11.0.22_7-jdk-focal
+FROM eclipse-temurin:11.0.22_7-jdk-alpine
 
 LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
 	description="ADempiere Mobile gRPC Service"
