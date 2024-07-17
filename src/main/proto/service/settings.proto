@@ -127,7 +127,7 @@ service SettingsService {
 
 	rpc GetHomeScreen(GetHomeScreenRequest) returns (HomeScreen) {
 		option (google.api.http) = {
-			get: "/app/home-screen"
+			get: "/app/dashboard-screen"
 		};
 	}
 }
