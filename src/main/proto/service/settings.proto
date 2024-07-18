@@ -96,22 +96,135 @@ message BaseSettingsData {
 }
 
 
-message HomeScreen {
+message DashboardScreen {
 	bool result = 1;
 	string message = 2;
-	HomeScreenData data = 3;
+	DashboardScreenData data = 3;
 }
 
-message HomeScreenData {
-	repeated HomeScreenDataValue data = 1;
+message DashboardScreenData {
+	repeated DashboardScreenDataValue data = 1;
 }
 
-message HomeScreenDataValue {
+message DashboardScreenDataValue {
 	string name = 1;
 	string slug = 2;
 	int32 position = 3;
 	string icon = 4;
 	string image_type = 5;
+}
+
+message GetDashboardScreenRequest {
+
+}
+
+message UpdateCount {
+	string name = 1;
+	int32 count = 2;
+}
+
+message UpdateData {
+	int32 id = 1;
+	string name = 2;
+	string slug = 3;
+	int32 position = 4;
+	string icon = 5;
+	int32 number = 6;
+	string text = 7;
+	string end_point = 8;
+	string button_text = 9;
+	string color = 10;
+	string title = 11;
+	string date_range = 12;
+	string start_date = 13;
+	string end_date = 14;
+	bool is_creator = 15;
+	int32 users_count = 16;
+	repeated Member members = 17;
+}
+
+message Update {
+	string slug = 1;
+	string label = 2;
+	string title = 3;
+	repeated UpdateData data = 4;
+	string end_point = 5;
+}
+
+message CompleteTask {
+	int32 date = 1;
+	int32 complete = 2;
+}
+
+message IncompleteTask {
+	int32 date = 1;
+	int32 incomplete = 2;
+}
+
+message StaticsticsData {
+	repeated CompleteTask complete_tasks = 1;
+	repeated IncompleteTask incomplete_tasks = 2;
+}
+
+message Staticstics {
+	string slug = 1;
+	string label = 2;
+	StaticsticsData data = 3;
+}
+
+message CalendarData {
+	string current_month = 1;
+	string selected_date = 2;
+}
+
+message Calendar {
+	string slug = 1;
+	string label = 2;
+	CalendarData data = 3;
+}
+
+message Member {
+	int32 id = 1;
+	string name = 2;
+	string phone = 3;
+	string email = 4;
+	string designation = 5;
+	string department = 6;
+	string avatar = 7;
+}
+
+message Project {
+	int32 id = 1;
+	string title = 2;
+	string date_range = 3;
+	int32 user_count = 4;
+	repeated Member members = 5;
+	int32 progress = 6;
+	string color = 7;
+	string status = 8;
+	string priority = 9;
+	string priority_color = 10;
+	bool clickable = 11;
+	string end_point = 12;
+}
+
+message HomeScreenData {
+	Update project_summary = 1;
+	Staticstics staticstics = 2;
+	Update tasks = 3;
+	repeated Project projects = 4;
+	Update notices = 5;
+	Update supports = 6;
+	Calendar calendar = 7;
+	UpdateCount project_count = 8;
+	UpdateCount client_count = 9;
+	UpdateCount task_count = 10;
+}
+
+message HomeScreen {
+	bool result = 1;
+	string message = 2;
+	HomeScreenData data = 3;
 }
 
 message GetHomeScreenRequest {
@@ -125,9 +238,15 @@ service SettingsService {
 		};
 	}
 
-	rpc GetHomeScreen(GetHomeScreenRequest) returns (HomeScreen) {
+	rpc GetDashboardScreen(GetDashboardScreenRequest) returns (DashboardScreen) {
 		option (google.api.http) = {
 			get: "/app/dashboard-screen"
+		};
+	}
+	
+	rpc GetHomeScreen(GetHomeScreenRequest) returns (HomeScreen) {
+		option (google.api.http) = {
+			get: "/app/home-screen"
 		};
 	}
 }

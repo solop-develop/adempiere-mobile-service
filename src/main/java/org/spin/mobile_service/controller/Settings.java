@@ -18,8 +18,10 @@ import org.compiere.util.CLogger;
 import org.spin.mobile_service.service.settings.SettingsService;
 import org.spin.proto.mobile.settings.BaseSettings;
 import org.spin.proto.mobile.settings.GetBaseSettingsRequest;
+import org.spin.proto.mobile.settings.GetDashboardScreenRequest;
 import org.spin.proto.mobile.settings.GetHomeScreenRequest;
 import org.spin.proto.mobile.settings.HomeScreen;
+import org.spin.proto.mobile.settings.DashboardScreen;
 import org.spin.proto.mobile.settings.SettingsServiceGrpc.SettingsServiceImplBase;
 
 import io.grpc.Status;
@@ -34,6 +36,20 @@ public class Settings extends SettingsServiceImplBase {
 	public void getBaseSettings(GetBaseSettingsRequest request, StreamObserver<BaseSettings> responseObserver) {
 		try {
 			responseObserver.onNext(SettingsService.getBaseSettings().build());
+			responseObserver.onCompleted();
+		} catch (Exception e) {
+			log.severe(e.getLocalizedMessage());
+			responseObserver.onError(Status.INTERNAL
+					.withDescription(e.getLocalizedMessage())
+					.withCause(e)
+					.asRuntimeException());
+		}
+	}
+	
+	@Override
+	public void getDashboardScreen(GetDashboardScreenRequest request, StreamObserver<DashboardScreen> responseObserver) {
+		try {
+			responseObserver.onNext(SettingsService.getDashboardScreen(request));
 			responseObserver.onCompleted();
 		} catch (Exception e) {
 			log.severe(e.getLocalizedMessage());

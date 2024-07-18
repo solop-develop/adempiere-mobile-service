@@ -33,16 +33,27 @@ import org.spin.proto.mobile.settings.BarikoiApi;
 import org.spin.proto.mobile.settings.BaseSettings;
 import org.spin.proto.mobile.settings.BaseSettingsData;
 import org.spin.proto.mobile.settings.BreakStatus;
+import org.spin.proto.mobile.settings.CompleteTask;
 import org.spin.proto.mobile.settings.DutySchedule;
+import org.spin.proto.mobile.settings.GetDashboardScreenRequest;
 import org.spin.proto.mobile.settings.GetHomeScreenRequest;
 import org.spin.proto.mobile.settings.HomeScreen;
 import org.spin.proto.mobile.settings.HomeScreenData;
-import org.spin.proto.mobile.settings.HomeScreenDataValue;
+import org.spin.proto.mobile.settings.IncompleteTask;
+import org.spin.proto.mobile.settings.DashboardScreen;
+import org.spin.proto.mobile.settings.DashboardScreenData;
+import org.spin.proto.mobile.settings.DashboardScreenDataValue;
 import org.spin.proto.mobile.settings.KeyValueData;
 import org.spin.proto.mobile.settings.LiveTracking;
 import org.spin.proto.mobile.settings.LocationServices;
+import org.spin.proto.mobile.settings.Project;
+import org.spin.proto.mobile.settings.Staticstics;
+import org.spin.proto.mobile.settings.StaticsticsData;
 import org.spin.proto.mobile.settings.TimeDefinition;
 import org.spin.proto.mobile.settings.TimeWish;
+import org.spin.proto.mobile.settings.Update;
+import org.spin.proto.mobile.settings.UpdateCount;
+import org.spin.proto.mobile.settings.UpdateData;
 
 public class SettingsService {
 	
@@ -123,8 +134,8 @@ public class SettingsService {
 				.setMessage("Base settings information");
 	}
 	
-	public static HomeScreen getHomeScreen(GetHomeScreenRequest request) {
-		HomeScreenData.Builder data = HomeScreenData.newBuilder();
+	public static DashboardScreen getDashboardScreen(GetDashboardScreenRequest request) {
+		DashboardScreenData.Builder data = DashboardScreenData.newBuilder();
 		AtomicInteger position = new AtomicInteger(1);
 		new Query(Env.getCtx(), I_AD_Form.Table_Name, Changes.COLUMNNAME_MOBILE_IsMobile + " = 'Y' "
 				+ "AND EXISTS(SELECT 1 FROM AD_Form_Access fa WHERE fa.AD_Form_ID = AD_Form.AD_Form_ID AND fa.AD_Role_ID = ?)", null)
@@ -138,7 +149,7 @@ public class SettingsService {
 				if(extensionIndex < imageUrl.length()) {
 					imageType = imageUrl.substring(extensionIndex);
 				}
-				data.addData(HomeScreenDataValue.newBuilder()
+				data.addData(DashboardScreenDataValue.newBuilder()
 						.setName(form.get_Translation(I_AD_Form.COLUMNNAME_Name))
 						.setSlug(slug)
 						.setPosition(position.getAndIncrement())
@@ -146,10 +157,54 @@ public class SettingsService {
 						.setImageType(imageType));
 			}
 		});
+		return DashboardScreen.newBuilder()
+				.setData(data)
+				.setResult(true)
+				.setMessage("App dashboard screen")
+				.build();
+	}
+	
+	public static HomeScreen getHomeScreen(GetHomeScreenRequest request) {
+		Update.Builder projectSummary = Update.newBuilder().addData(UpdateData.newBuilder());
+		//
+		StaticsticsData.Builder statisticData = StaticsticsData.newBuilder().addCompleteTasks(CompleteTask.newBuilder()).addIncompleteTasks(IncompleteTask.newBuilder());
+		Staticstics.Builder staticstics = Staticstics.newBuilder().setData(statisticData);
+		//	Tasks
+		Update.Builder tasks = Update.newBuilder().addData(UpdateData.newBuilder());
+		//	Project
+		Project.Builder project = Project.newBuilder();
+		//	Notices
+		Update.Builder notices = Update.newBuilder().addData(UpdateData.newBuilder());
+		//	Support
+		Update.Builder supports = Update.newBuilder().addData(UpdateData.newBuilder());
+		//	Calendar
+		org.spin.proto.mobile.settings.CalendarData.Builder calendarData = org.spin.proto.mobile.settings.CalendarData.newBuilder();
+		org.spin.proto.mobile.settings.Calendar.Builder calendar = org.spin.proto.mobile.settings.Calendar.newBuilder().setData(calendarData);
+		//	Project Count
+		UpdateCount.Builder projectCount = UpdateCount.newBuilder().setName("").setCount(0);
+		//	Client Count
+		UpdateCount.Builder clientCount = UpdateCount.newBuilder().setName("").setCount(0);
+		//	Task Count
+		UpdateCount.Builder taskCount = UpdateCount.newBuilder().setName("").setCount(0);
+		//	Data
+		HomeScreenData.Builder data = HomeScreenData.newBuilder();
+		//	
+		data
+		.setProjectSummary(projectSummary)
+		.setStaticstics(staticstics)
+		.setTasks(tasks)
+		.addProjects(project)
+		.setNotices(notices)
+		.setSupports(supports)
+		.setCalendar(calendar)
+		.setProjectCount(projectCount)
+		.setClientCount(clientCount)
+		.setTaskCount(taskCount)
+		;
 		return HomeScreen.newBuilder()
 				.setData(data)
 				.setResult(true)
-				.setMessage("App home screen menus")
+				.setMessage("App home screen")
 				.build();
 	}
 }
