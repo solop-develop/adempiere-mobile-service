@@ -87,7 +87,7 @@ public class SettingsService {
 		
 		// Getting the time zone of calendar
 		BaseSettingsData.Builder data = BaseSettingsData.newBuilder()
-				.setIsAdmin(true)
+				.setIsAdmin(user.isProjectManager())
 				.setIsHr(true)
 				.setIsManager(true)
 				.setIsFaceRegistered(true)
