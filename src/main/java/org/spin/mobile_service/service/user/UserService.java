@@ -66,6 +66,7 @@ public class UserService {
 			socialMedia.setAD_User_ID(request.getUserId());
 			socialMedia.setApplicationType(APPLICATION_TYPE);
 			socialMedia.setAccountName(request.getFirebaseToken());
+			socialMedia.setIsReceiveNotifications(true);
 			if(!Util.isEmpty(request.getDeviceName())) {
 				socialMedia.setDescription(request.getDeviceName());
 			}
