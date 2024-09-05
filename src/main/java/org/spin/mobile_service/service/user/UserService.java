@@ -63,6 +63,7 @@ public class UserService {
 				socialMediaId = 0;
 			}
 			MADUserSocialMedia socialMedia = new MADUserSocialMedia(Env.getCtx(), socialMediaId, null);
+			socialMedia.setAD_User_ID(request.getUserId());
 			socialMedia.setApplicationType(APPLICATION_TYPE);
 			socialMedia.setAccountName(request.getFirebaseToken());
 			if(!Util.isEmpty(request.getDeviceName())) {
