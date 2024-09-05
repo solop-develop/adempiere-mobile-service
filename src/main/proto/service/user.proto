@@ -28,10 +28,27 @@ message GetCheckinStatusRequest {
 	int32 user_id = 1;
 }
 
+message SetMessageTokenRequest {
+	int32 user_id = 1;
+	string device_name = 2;
+	string firebase_token = 3;
+}
+
+message SetMessageTokenResponse {
+	bool result = 1;
+	string message = 2;
+}
+
 service UserService {
 	rpc GetCheckinStatus(GetCheckinStatusRequest) returns (GetCheckinStatusResponse) {
 		option (google.api.http) = {
 			post: "/user/attendance/get-checkin-checkout-status"
+		};
+	}
+	
+	rpc SetMessageToken(SetMessageTokenRequest) returns (SetMessageTokenResponse) {
+		option (google.api.http) = {
+			post: "/user/firebase-token"
 		};
 	}
 }

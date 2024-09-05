@@ -28,7 +28,7 @@ import org.compiere.model.MUser;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
-import org.spin.mobile.util.Changes;
+import org.spin.mobile_service.util.GlobalValues;
 import org.spin.proto.mobile.settings.BarikoiApi;
 import org.spin.proto.mobile.settings.BaseSettings;
 import org.spin.proto.mobile.settings.BaseSettingsData;
@@ -137,13 +137,13 @@ public class SettingsService {
 	public static DashboardScreen getDashboardScreen(GetDashboardScreenRequest request) {
 		DashboardScreenData.Builder data = DashboardScreenData.newBuilder();
 		AtomicInteger position = new AtomicInteger(1);
-		new Query(Env.getCtx(), I_AD_Form.Table_Name, Changes.COLUMNNAME_MOBILE_IsMobile + " = 'Y' "
+		new Query(Env.getCtx(), I_AD_Form.Table_Name, GlobalValues.COLUMNNAME_MOBILE_IsMobile + " = 'Y' "
 				+ "AND EXISTS(SELECT 1 FROM AD_Form_Access fa WHERE fa.AD_Form_ID = AD_Form.AD_Form_ID AND fa.AD_Role_ID = ?)", null)
 		.setParameters(Env.getAD_Role_ID(Env.getCtx())).getIDsAsList().forEach(formId -> {
 			MForm form = new MForm(Env.getCtx(), formId, null);
-			String slug = form.get_ValueAsString(Changes.COLUMNNAME_MOBILE_Slug);
+			String slug = form.get_ValueAsString(GlobalValues.COLUMNNAME_MOBILE_Slug);
 			if(!Util.isEmpty(slug)) {
-				String imageUrl = Optional.ofNullable(form.get_ValueAsString(Changes.COLUMNNAME_MOBILE_ImageURL)).orElse("https://www.adempiere.io/assets/icon/logo.png");
+				String imageUrl = Optional.ofNullable(form.get_ValueAsString(GlobalValues.COLUMNNAME_MOBILE_ImageURL)).orElse("https://www.adempiere.io/assets/icon/logo.png");
 				int extensionIndex = imageUrl.lastIndexOf(".") + 1;
 				String imageType = "png";
 				if(extensionIndex < imageUrl.length()) {

@@ -22,6 +22,14 @@ import java.text.SimpleDateFormat;
  * Global changes for server
  */
 public class GlobalValues {
+	/**	Is Mobile Feature	*/
+	public static final String COLUMNNAME_MOBILE_IsMobile = "MOBILE_IsMobile";
+	/**	Form Slug	*/
+	public static final String COLUMNNAME_MOBILE_Slug = "MOBILE_Slug";
+	/**	Image URL	*/
+	public static final String COLUMNNAME_MOBILE_ImageURL = "MOBILE_ImageURL";
+	/**	Account Type	*/
+	public static final String AccountType = "";
 	public static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
 	public static final String MEDIUM_DATE_FORMAT = "dd MMM yyyy";
 	public static final String MEDIUM_DATE_FORMAT_DD_MMM = "dd MMM";

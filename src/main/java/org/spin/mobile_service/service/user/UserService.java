@@ -14,12 +14,23 @@
  ************************************************************************************/
 package org.spin.mobile_service.service.user;
 
+import org.adempiere.exceptions.AdempiereException;
+import org.compiere.model.MUser;
+import org.compiere.model.Query;
+import org.compiere.util.Env;
+import org.compiere.util.Util;
+import org.spin.model.MADUserSocialMedia;
 import org.spin.proto.mobile.user.CheckinData;
 import org.spin.proto.mobile.user.GetCheckinStatusRequest;
 import org.spin.proto.mobile.user.GetCheckinStatusResponse;
+import org.spin.proto.mobile.user.SetMessageTokenRequest;
+import org.spin.proto.mobile.user.SetMessageTokenResponse;
 
 
 public class UserService {
+	
+	/**	Firebase	*/
+	public static final String APPLICATION_TYPE = "MFB";
 	
 	public static GetCheckinStatusResponse getCheckinStatus(GetCheckinStatusRequest chekToken) {
 		
@@ -31,5 +42,45 @@ public class UserService {
 				.setResult(true)
 				.setMessage("Please check in now")
 				.build();
+	}
+	
+	public static SetMessageTokenResponse setMessageToken(SetMessageTokenRequest request) {
+		if(request.getUserId() <= 0) {
+			throw new AdempiereException("@AD_User_ID@ @IsMandatory@");
+		}
+		if(Util.isEmpty(request.getFirebaseToken())) {
+			throw new AdempiereException("@Token@ @IsMandatory@");
+		}
+		//	Get User
+		MUser user = MUser.get(Env.getCtx(), request.getUserId());
+		if(user == null) {
+			throw new AdempiereException("@Token@ @IsMandatory@");	
+		}
+		//	
+		if(user.isActive()) {
+			int socialMediaId = getSocialMediaId(request.getUserId(), request.getFirebaseToken());
+			if(socialMediaId < 0) {
+				socialMediaId = 0;
+			}
+			MADUserSocialMedia socialMedia = new MADUserSocialMedia(Env.getCtx(), socialMediaId, null);
+			socialMedia.setApplicationType(APPLICATION_TYPE);
+			socialMedia.setAccountName(request.getFirebaseToken());
+			if(!Util.isEmpty(request.getDeviceName())) {
+				socialMedia.setDescription(request.getDeviceName());
+			}
+			socialMedia.saveEx();
+		}
+		//	
+		return SetMessageTokenResponse.newBuilder()
+				.setResult(true)
+				.setMessage("Token saved from user " + user.getName())
+				.build();
+	}
+	
+	private static int getSocialMediaId(int userId, String applicationType) {
+		return new Query(Env.getCtx(), MADUserSocialMedia.Table_Name, "AD_User_ID = ? AND ApplicationType = ?", null)
+				.setParameters(userId, applicationType)
+				.setOnlyActiveRecords(true)
+				.firstId();
 	}
 }
