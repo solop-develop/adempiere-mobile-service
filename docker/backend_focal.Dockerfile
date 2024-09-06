@@ -5,7 +5,7 @@ LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
 
 # Init ENV with default values
 ENV \
-	SERVER_PORT="50062" \
+	SERVER_PORT="50059" \
 	SERVER_LOG_LEVEL="WARNING" \
 	DB_HOST="localhost" \
 	DB_PORT="5432" \
