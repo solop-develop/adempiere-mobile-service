@@ -58,7 +58,7 @@ public class UserService {
 		}
 		//	
 		if(user.isActive()) {
-			int socialMediaId = getSocialMediaId(request.getUserId(), request.getFirebaseToken());
+			int socialMediaId = getSocialMediaId(request.getUserId(), APPLICATION_TYPE);
 			if(socialMediaId < 0) {
 				socialMediaId = 0;
 			}
