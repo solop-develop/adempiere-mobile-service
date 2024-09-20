@@ -34,10 +34,12 @@ repositories {
 	mavenLocal()
     mavenCentral()
     maven {
-    	url = System.getenv("GITHUB_DEPLOY_REPOSITORY") ?: System.properties['deploy.repository'] ?: 'https://maven.pkg.github.com'
-        credentials {
-        	username = System.getenv("GITHUB_DEPLOY_USER") ?: System.properties['deploy.user']
-            password = System.getenv("GITHUB_DEPLOY_TOKEN") ?: System.properties['deploy.token'] 
+		// Adempiere GitHub Organization
+		url = 'https://maven.pkg.github.com/adempiere/adempiere'
+		credentials {
+			// project property, system properrty, enviroment variable
+			username = findProperty("deployUsername") ?: System.properties['deploy.user'] ?: System.getenv("GITHUB_DEPLOY_USER")
+			password = findProperty("deployToken") ?: System.properties['deploy.token'] ?: System.getenv("GITHUB_DEPLOY_TOKEN")
 		}
 	}
 }
@@ -152,7 +154,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.0'
 	//	ADempiere Core
 	implementation "${baseGroupId}:base:${baseVersion}"
-	implementation "${baseGroupId}:adempiere-grpc-utils:1.3.4"
+	implementation "${baseGroupId}:adempiere-grpc-utils:1.5.1"
 	implementation "${baseGroupId}:human-resource-and-payroll:${baseVersion}"
 	//	Others
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
