@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.google.protobuf' version '0.9.3'
+    id 'com.google.protobuf' version '0.9.4'
     id 'idea'
     id 'application'
     id 'visual-studio'
@@ -8,8 +8,11 @@ plugins {
 }
 
 group 'com.nikhilm'
+
 sourceCompatibility = 1.11
-def grpcVersion = '1.62.2'
+
+def grpcVersion = '1.63.0'
+def protobufVersion = '3.25.3'
 def baseVersion = '3.9.4'
 def baseGroupId = 'io.github.adempiere'
 def privateDependencyBaseVersion = "adempiere-3.9.4"
@@ -33,6 +36,15 @@ jar {
 repositories {
 	mavenLocal()
     mavenCentral()
+    maven {
+		// Adempiere GitHub Organization
+		url = 'https://maven.pkg.github.com/solop-develop/adempiere-solop'
+		credentials {
+			// project property, system properrty, enviroment variable
+			username = findProperty("deployUsername") ?: System.properties['deploy.user'] ?: System.getenv("GITHUB_DEPLOY_USER")
+			password = findProperty("deployToken") ?: System.properties['deploy.token'] ?: System.getenv("GITHUB_DEPLOY_TOKEN")
+		}
+	}
     maven {
 		// Adempiere GitHub Organization
 		url = 'https://maven.pkg.github.com/adempiere/adempiere'
@@ -137,25 +149,22 @@ dependencies {
             '*.jar'
         ]
     )
-    implementation "io.grpc:grpc-netty-shaded:${grpcVersion}"
+	implementation "io.netty:netty-handler:4.1.107.Final"
     implementation "io.grpc:grpc-alts:${grpcVersion}"
-	implementation "io.netty:netty-handler:4.1.99.Final"
+	runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
     implementation "io.grpc:grpc-netty:${grpcVersion}"
     // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-	implementation 'com.google.protobuf:protobuf-java:3.24.3'
-	implementation 'com.google.protobuf:protobuf-java-util:3.24.3'
-
-    //implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
-	//implementation 'com.sun.xml.bind:jaxb-impl:3.0.0-M4'
-	//implementation 'com.sun.xml.bind:jaxb-core:3.0.0-M4'
-	//implementation 'javax.activation:activation:1.1.1'
-	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.0'
-	//	ADempiere Core
-	implementation "${baseGroupId}:base:${baseVersion}"
-	implementation "${baseGroupId}:adempiere-grpc-utils:1.5.1"
-	implementation "${baseGroupId}:human-resource-and-payroll:${baseVersion}"
+	implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+	implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+	implementation 'com.sun.xml.bind:jaxb-impl:3.0.0-M4'
+	implementation 'com.sun.xml.bind:jaxb-core:3.0.0-M4'
+	implementation 'javax.activation:activation:1.1.1'
 	//	Others
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+
+	//	ADempiere Core + Patches + Features
+	implementation "com.solop:adempiere.solop_libs:3.9.4.001-1.1.2"
 }
