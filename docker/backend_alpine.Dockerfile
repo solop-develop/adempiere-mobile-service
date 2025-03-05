@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11.0.22_7-jdk-alpine
+FROM eclipse-temurin:11.0.24_8-jdk-alpine
 
 LABEL maintainer="ySenih@erpya.com; EdwinBetanc0urt@outlook.com;" \
 	description="ADempiere Mobile gRPC Service"
@@ -21,6 +21,7 @@ ENV \
 	KEEPALIVE_TIME="360000" \
 	CONNECTION_TEST_QUERY="\"SELECT 1\"" \
 	SYSTEM_LOGO_URL="" \
+	JAVA_OPTIONS="\"-Xms64M\" \"-Xmx1512M\"" \
 	TZ="America/Caracas"
 
 EXPOSE ${SERVER_PORT}
@@ -47,6 +48,7 @@ COPY docker/env.yaml /opt/apps/server/env.yaml
 COPY docker/start.sh /opt/apps/server/start.sh
 
 
+# Add adempiere as user
 RUN addgroup adempiere && \
 	adduser --disabled-password --gecos "" --ingroup adempiere --no-create-home adempiere && \
 	chown -R adempiere /opt/apps/server/ && \
