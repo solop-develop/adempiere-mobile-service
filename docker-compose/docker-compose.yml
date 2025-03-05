@@ -31,7 +31,7 @@ services:
     container_name: ${GRPC_SERVER_HOST}
     restart: ${GENERIC_RESTART}
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_SERVER_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
@@ -81,6 +81,7 @@ services:
       - adempiere_db_password
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_HOST}
+      ADEMPIERE_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
       # ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
       ADEMPIERE_DB_PASSWORD_FILE: /run/secrets/adempiere_db_password
@@ -89,6 +90,8 @@ services:
         condition: service_healthy
     networks:
       - shared_network
+
+
 
 networks:
   shared_network:
