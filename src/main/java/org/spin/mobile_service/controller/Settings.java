@@ -69,7 +69,7 @@ public class Settings extends SettingsServiceImplBase {
 			);
 		}
 	}
-	
+
 	@Override
 	public void getDashboardScreen(GetDashboardScreenRequest request, StreamObserver<DashboardScreen> responseObserver) {
 		try {
@@ -94,6 +94,7 @@ public class Settings extends SettingsServiceImplBase {
 			responseObserver.onCompleted();
 		} catch (Exception e) {
 			log.warning(e.getLocalizedMessage());
+			e.printStackTrace();
 			responseObserver.onError(
 				Status.INTERNAL
 					.withDescription(e.getLocalizedMessage())
