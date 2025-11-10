@@ -31,33 +31,32 @@ import org.spin.proto.mobile.auth.LoginResponseData;
 import org.spin.proto.mobile.auth.LogoutRequest;
 import org.spin.proto.mobile.auth.LogoutResponse;
 import org.spin.service.grpc.authentication.SessionManager;
-import org.spin.service.grpc.util.value.ValueManager;
+import org.spin.service.grpc.util.value.TextManager;
 
 public class AuthService {
-	
+
 	public static CheckTokenResponse checkToken(CheckTokenRequest chekToken) {
-		if(Util.isEmpty(chekToken.getToken())) {
-			throw new AdempiereException("Token is Mandatory");
+		if(Util.isEmpty(chekToken.getToken(), true)) {
+			throw new AdempiereException("@FillMandatory@ Token");
 		}
 		//	
-		
 		CheckTokenResponse.Builder response = CheckTokenResponse.newBuilder();
 		//	Validate Token
 		SessionManager.getSessionFromToken(chekToken.getToken());
-		
 		return response.build();
 	}
-	
+
+
 	public static LogoutResponse logout(LogoutRequest logout) {
 		MSession session = MSession.get(Env.getCtx(), false);
 		//	Logout
 		session.logout();
 		return LogoutResponse.newBuilder().setMessage("Logged Out").setResult(true).build();
 	}
-	
-	
+
+
 	public static LoginResponse login(LoginRequest loginRequest) {
-		if(Util.isEmpty(loginRequest.getEmail()) || Util.isEmpty(loginRequest.getPassword())) {
+		if(Util.isEmpty(loginRequest.getEmail(), true) || Util.isEmpty(loginRequest.getPassword(), true)) {
 			throw new AdempiereException("@FillMandatory@ @AD_User_ID@ / @Password@");
 		}
 
@@ -65,7 +64,7 @@ public class AuthService {
 		int userId = login.getAuthenticatedUserId(loginRequest.getEmail(), loginRequest.getPassword());
 		//	Get Values from role
 		if(userId <= 0) {
-			throw new AdempiereException("@AD_User_ID@ / @Password@ @NotFound@");
+			throw new AdempiereException("@AD_User_ID@ / @Password@ / @AD_Role_ID@ / @AD_Org_ID@ @NotFound@");
 		}
 		MUser user = MUser.get(Env.getCtx(), userId);
 		if (user == null) {
@@ -98,16 +97,20 @@ public class AuthService {
 			false
 		);
 		LoginResponseData.Builder loginData = LoginResponseData.newBuilder()
-				.setToken(bearerToken)
-				.setName(user.getName())
-				.setEmail(user.getEMail())
-				.setPhone(ValueManager.validateNull(user.getPhone()))
-				.setCompanyId(user.getAD_Client_ID())
-				.setIsAdmin(user.isProjectManager())
-				.setId(userId)
-				//	TODO: Add real data
-				.setIsFaceRegistered(false)
-				.setAvatar("https://www.adempiere.io/assets/icon/logo.png")
+			.setToken(bearerToken)
+			.setName(user.getName())
+			.setEmail(user.getEMail())
+			.setPhone(
+				TextManager.getValidString(
+					user.getPhone()
+				)
+			)
+			.setCompanyId(user.getAD_Client_ID())
+			.setIsAdmin(user.isProjectManager())
+			.setId(userId)
+			//	TODO: Add real data
+			.setIsFaceRegistered(false)
+			.setAvatar("https://www.adempiere.io/assets/icon/logo.png")
 		;
 		//	Get employee data
 		if(user.getC_BPartner_ID() > 0) {
@@ -117,16 +120,25 @@ public class AuthService {
 				if(employee.getHR_Department_ID() > 0) {
 					MHRDepartment department = MHRDepartment.getById(Env.getCtx(), employee.getHR_Department_ID(), null);
 					if(department != null) {
-						loginData.setDepartmentId(department.getHR_Department_ID())
-						.setDepartmentName(ValueManager.validateNull(department.getName()));
+						loginData.setDepartmentId(
+								department.getHR_Department_ID()
+							)
+							.setDepartmentName(
+								TextManager.getValidString(
+									department.getName()
+								)
+							)
+						;
 					}
 				}
 			}
 		}
 		builder.setData(loginData)
 			.setResult(true)
-			.setMessage("Successfully Login");
+			.setMessage("Successfully Login")
+		;
 		//	Return session
 		return builder.build();
 	}
+
 }
